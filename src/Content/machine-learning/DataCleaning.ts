@@ -7,7 +7,7 @@ const getdata = async () => {
       space: "pck04d18e2o1",
       accessToken: "2AHigTyYL2481suTvHgSVl_xrd5pNwaac-dxyyxzEa8",
     });
-    const res = await client.getEntries({ content_type: "machineLearning" });
+    const res = await client.getEntries({ content_type: "dataPreprocessing" });
 
     // Check if items exist
     if (!res.items) {
@@ -17,7 +17,7 @@ const getdata = async () => {
     
     // Transform data
     const Data = res.items.map(item => ({
-      category: item.fields.category,
+      reading_time: item.fields.readingTime,
       title: item.fields.title,
       src: `https:${item.fields.thumbnail.fields.file.url}`,
       content: item.fields.content,

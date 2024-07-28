@@ -1,13 +1,14 @@
 "use client";
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { BLOCKS, MARKS } from "@contentful/rich-text-types";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import Image, { ImageProps } from "next/image";
 import { useOutsideClick } from "@/hooks/use-outside-click";
 
-const options = {
+const renderOptions = {
   renderNode: {
-    'embedded-asset-block': (node) => {
+    [BLOCKS.EMBEDDED_ASSET]: (node) => {
       const { title, file } = node.data.target.fields;
       const { url, details } = file;
       const { width, height } = details.image;
@@ -16,15 +17,25 @@ const options = {
         <div>
           <Image
             src={`https:${url}`}
-            alt={title}
+            alt={title || "Contentful Asset"}
             width={width}
             height={height}
           />
         </div>
       );
     },
+    [BLOCKS.HEADING_1]: (node, children) => <h1>{children}</h1>,
+    [BLOCKS.HEADING_2]: (node, children) => <h2>{children}</h2>,
+    [BLOCKS.HEADING_3]: (node, children) => <h3>{children}</h3>,
+  },
+
+  renderMark: {
+    [MARKS.BOLD]: (text) => <strong>{text}</strong>,
+    [MARKS.ITALIC]: (text) => <em>{text}</em>,
+    [MARKS.UNDERLINE]: (text) => <u>{text}</u>,
   },
 };
+
 import React, {
   useEffect,
   useRef,
@@ -32,9 +43,7 @@ import React, {
   createContext,
   useContext,
 } from "react";
-import {
-  IconX,
-} from "@tabler/icons-react";
+import { IconX } from "@tabler/icons-react";
 
 interface CarouselProps {
   items: JSX.Element[];
@@ -44,7 +53,7 @@ interface CarouselProps {
 type Card = {
   src: string;
   title: string;
-  category: string;
+  reading_time: string;
   content: any;
 };
 
@@ -77,10 +86,9 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
     }
   };
 
-
   const handleCardClose = (index: number) => {
     if (carouselRef.current) {
-      const cardWidth = isMobile() ? 230 : 384; // (md:w-96)
+      const cardWidth = isMobile() ? 230 : 384;
       const gap = isMobile() ? 4 : 8;
       const scrollPosition = (cardWidth + gap) * (index + 1);
       carouselRef.current.scrollTo({
@@ -114,7 +122,7 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
           <div
             className={cn(
               "flex flex-row justify-start gap-4 pl-4",
-              "max-w-7xl mx-auto" // remove max-w-4xl if you want the carousel to span the full width of its container
+              "max-w-7xl mx-auto"
             )}
           >
             {items.map((item, index) => (
@@ -141,7 +149,6 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
             ))}
           </div>
         </div>
-     
       </div>
     </CarouselContext.Provider>
   );
@@ -217,7 +224,7 @@ export const Card = ({
                 layoutId={layout ? `category-${card.title}` : undefined}
                 className="text-base font-medium text-black dark:text-white"
               >
-                {card.category}
+                {card.reading_time}
               </motion.p>
               <motion.p
                 layoutId={layout ? `title-${card.title}` : undefined}
@@ -226,7 +233,9 @@ export const Card = ({
                 {card.title}
               </motion.p>
 
-              <div className="py-10">{documentToReactComponents(card.content, options)}</div>
+              <div className="py-10">
+                {documentToReactComponents(card.content || {}, renderOptions)}
+              </div>
             </motion.div>
           </div>
         )}
@@ -239,10 +248,10 @@ export const Card = ({
         <div className="absolute h-full top-0 inset-x-0 bg-gradient-to-b from-black/50 via-transparent to-transparent z-30 pointer-events-none" />
         <div className="relative z-40 p-8">
           <motion.p
-            layoutId={layout ? `category-${card.category}` : undefined}
+            layoutId={layout ? `category-${card.reading_time}` : undefined}
             className="text-white text-sm md:text-base font-medium font-sans text-left"
           >
-            {card.category}
+            {card.reading_time}
           </motion.p>
           <motion.p
             layoutId={layout ? `title-${card.title}` : undefined}
