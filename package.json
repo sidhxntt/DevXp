@@ -9,8 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@contentful/rich-text-react-renderer": "^15.22.8",
     "@tabler/icons-react": "^3.11.0",
     "clsx": "^2.1.1",
+    "contentful": "^10.12.15",
     "framer-motion": "^11.3.18",
     "next": "14.2.5",
     "react": "^18",
