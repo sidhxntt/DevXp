@@ -10,17 +10,20 @@
   },
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^15.22.8",
+    "@radix-ui/react-hover-card": "^1.1.1",
     "@tabler/icons-react": "^3.11.0",
     "clsx": "^2.1.1",
     "contentful": "^10.12.15",
     "framer-motion": "^11.3.18",
     "next": "14.2.5",
+    "qss": "^3.0.0",
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^5.2.1",
     "tailwind-merge": "^2.4.0"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.13",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
