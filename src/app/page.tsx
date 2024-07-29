@@ -1,9 +1,9 @@
-import { BentoGridDemo } from "@/Components/BentoGrid/Index"
+import { BentoGridDemo } from "@/Components/BentoGrid/Index";
 
 const page = () => {
   return (
-      <BentoGridDemo/>
-  )
-}
+    <BentoGridDemo />  
+  );
+};
 
-export default page
+export default page;

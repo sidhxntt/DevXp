@@ -1039,6 +1039,15 @@ video {
 .top-4 {
   top: 1rem;
 }
+.left-60 {
+  left: 15rem;
+}
+.top-3 {
+  top: 0.75rem;
+}
+.top-1 {
+  top: 0.25rem;
+}
 .z-10 {
   z-index: 10;
 }
@@ -1088,6 +1097,21 @@ video {
 }
 .mt-4 {
   margin-top: 1rem;
+}
+.ml-10 {
+  margin-left: 2.5rem;
+}
+.ml-52 {
+  margin-left: 13rem;
+}
+.ml-36 {
+  margin-left: 9rem;
+}
+.ml-24 {
+  margin-left: 6rem;
+}
+.ml-20 {
+  margin-left: 5rem;
 }
 .block {
   display: block;
@@ -1201,8 +1225,14 @@ video {
 .justify-between {
   justify-content: space-between;
 }
+.justify-evenly {
+  justify-content: space-evenly;
+}
 .gap-4 {
   gap: 1rem;
+}
+.gap-1 {
+  gap: 0.25rem;
 }
 .space-x-6 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;

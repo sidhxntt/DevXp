@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Image, { ImageProps } from "next/image";
 import { useOutsideClick } from "@/hooks/use-outside-click";
 import { IconX } from "@tabler/icons-react";
-
+import { CiTimer } from "react-icons/ci";
 
 import React, {
   useEffect,
@@ -15,7 +15,6 @@ import React, {
   useContext,
 } from "react";
 import renderOptions from "@/Content/documentToReactComponents(options)";
-
 
 interface CarouselProps {
   items: JSX.Element[];
@@ -196,7 +195,10 @@ export const Card = ({
                 layoutId={layout ? `category-${card.title}` : undefined}
                 className="text-base font-medium text-black dark:text-white"
               >
-                {card.reading_time}
+                <div className="flex gap-1">
+                  <CiTimer className="relative top-1" />
+                  {card.reading_time}
+                </div>
               </motion.p>
               <motion.p
                 layoutId={layout ? `title-${card.title}` : undefined}
@@ -223,7 +225,10 @@ export const Card = ({
             layoutId={layout ? `category-${card.reading_time}` : undefined}
             className="text-white text-sm md:text-base font-medium font-sans text-left"
           >
-            {card.reading_time}
+            <div className="flex gap-1">
+              <CiTimer className="relative top-1" />
+              {card.reading_time}
+            </div>
           </motion.p>
           <motion.p
             layoutId={layout ? `title-${card.title}` : undefined}
