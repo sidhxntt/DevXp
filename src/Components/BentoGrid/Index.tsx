@@ -1,9 +1,8 @@
 import { BentoGrid, BentoGridItem } from "./BentoGrid";
-import { SiTypescript, SiAnaconda } from "react-icons/si";
+import { SiTypescript, SiAnaconda, SiTensorflow } from "react-icons/si";
 import { FaReact, FaAws, FaCloud, FaBitcoin } from "react-icons/fa";
 import { DiLinux } from "react-icons/di";
 import { VscVscodeInsiders } from "react-icons/vsc";
-
 
 export function BentoGridDemo() {
   return (
@@ -90,4 +89,12 @@ const items = [
     icon: <VscVscodeInsiders className="h-4 w-4 text-neutral-500" />,
     path: "productivity",
   },
+  {
+    title: "Deep Learning",
+    description: "Experience the thrill of bringing ideas to life.",
+    header: <Skeleton image={"/DL.jpeg"}/>,
+    icon: <SiTensorflow className="h-4 w-4 text-neutral-500" />,
+    path: "productivity",
+  },
+
 ];

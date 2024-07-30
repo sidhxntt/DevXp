@@ -1,6 +1,5 @@
 import createConnection from "../ContentfulClient";
 
-// Fetch data from Contentful
 const get_dataPreprocessing_data = async () => {
   try {
     const client = await createConnection();

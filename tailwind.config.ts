@@ -28,10 +28,13 @@ const config: Config = {
             h4: {
               color: theme('colors.white'),
             },
-            blockquote: {
+            h5: {
               color: theme('colors.white'),
             },
-            a: {
+            h6: {
+              color: theme('colors.white'),
+            },
+            blockquote: {
               color: theme('colors.white'),
             },
             // Custom table styles

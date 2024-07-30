@@ -207,7 +207,7 @@ export const Card = ({
                 {card.title}
               </motion.p>
 
-              <div className="relative py-10 px-6 prose prose-a:text-blue-400 left-1/2 transform -translate-x-1/2">
+              <div className="relative py-10 px-6 prose prose-a:text-blue-400  left-1/2 transform -translate-x-1/2">
                 {documentToReactComponents(card.content, renderOptions)}
               </div>
             </motion.div>
