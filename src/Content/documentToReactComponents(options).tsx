@@ -1,8 +1,6 @@
-import Link from "next/link";
 import Image from "next/image";
 import { BLOCKS, INLINES, MARKS } from "@contentful/rich-text-types";
 import { LinkPreview } from "@/Components/LinkPreview/LinkPreview";
-
 
 const renderOptions = {
   renderNode: {

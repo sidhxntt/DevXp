@@ -1,29 +1,74 @@
 "use client";
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import { AppleCardsCarouselDemo } from "@/Components/Carousal";
-import get_dataPreprocessing_data from "@/Content/machine-learning/DataPreprocessing";
-import get_algorithms_data from '@/Content/machine-learning/Algorithms';
+import {
+  get_Supervised_algorithms_data,
+  get_Unsupervised_algorithms_data,
+  get_dataPreprocessing_data,
+} from "@/Content/machine-learning";
+import GradientCircularProgress from "@/Components/Loader/Loader";
 
 
 const Page = () => {
-  const [dataPreprocessing_data, set_DataPreprocessing_data] = useState([]);
-  const [algorithms_data, set_Algorithms_data]= useState([]);
+  const [data, setData] = useState({
+    dataPreprocessing: [],
+    supervisedAlgorithms: [],
+    unsupervisedAlgorithms: [],
+  });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      const fetched_dataPreprocessing_data = await get_dataPreprocessing_data();
-      const fetched_algorithms_data = await get_algorithms_data();
-      set_DataPreprocessing_data(fetched_dataPreprocessing_data);
-      set_Algorithms_data(fetched_algorithms_data);
+      try {
+        const [
+          dataPreprocessing,
+          supervisedAlgorithms,
+          unsupervisedAlgorithms,
+        ] = await Promise.all([
+          get_dataPreprocessing_data(),
+          get_Supervised_algorithms_data(),
+          get_Unsupervised_algorithms_data(),
+        ]);
+
+        setData({
+          dataPreprocessing,
+          supervisedAlgorithms,
+          unsupervisedAlgorithms,
+        });
+      } catch (err) {
+        setError("Failed to load data");
+        console.error(err);
+      } 
+      finally {
+        setLoading(false);
+      }
     };
+
     fetchData();
   }, []);
 
+  if (loading) return(
+    <div className="flex justify-center items-center h-96">
+      <GradientCircularProgress/>
+    </div>
+  )
+  if (error) return <p>{error}</p>;
+
   return (
     <>
-      <AppleCardsCarouselDemo name={"Data Preprocessing"} data={dataPreprocessing_data} />
-      <AppleCardsCarouselDemo name={"Supervised Algorithms"} data={dataPreprocessing_data} />
-      <AppleCardsCarouselDemo name={"Unsupervised Algorithms"} data={algorithms_data} />
+      <AppleCardsCarouselDemo
+        name="Data Preprocessing"
+        data={data.dataPreprocessing}
+      />
+      <AppleCardsCarouselDemo
+        name="Supervised Algorithms"
+        data={data.supervisedAlgorithms}
+      />
+      <AppleCardsCarouselDemo
+        name="Unsupervised Algorithms"
+        data={data.unsupervisedAlgorithms}
+      />
     </>
   );
 };

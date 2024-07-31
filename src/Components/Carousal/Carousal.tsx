@@ -6,6 +6,7 @@ import Image, { ImageProps } from "next/image";
 import { useOutsideClick } from "@/hooks/use-outside-click";
 import { IconX } from "@tabler/icons-react";
 import { CiTimer } from "react-icons/ci";
+import ReactMarkdown from "react-markdown"
 
 import React, {
   useEffect,
@@ -208,7 +209,7 @@ export const Card = ({
               </motion.p>
 
               <div className="relative py-10 px-6 prose prose-a:text-blue-400  left-1/2 transform -translate-x-1/2">
-                {documentToReactComponents(card.content, renderOptions)}
+                   {documentToReactComponents(card.content, renderOptions)}
               </div>
             </motion.div>
           </div>
