@@ -2,18 +2,22 @@
 import React, { useEffect, useState } from "react";
 import { AppleCardsCarouselDemo } from "@/Components/Carousal";
 import {
+  //add here
   get_Supervised_algorithms_data,
   get_Unsupervised_algorithms_data,
   get_dataPreprocessing_data,
+  get_Regularization_technqiues_data,
 } from "@/Content/machine-learning";
 import GradientCircularProgress from "@/Components/Loader/Loader";
 
 
 const MachineLearning = () => {
   const [data, setData] = useState({
+    //add here
     dataPreprocessing: [],
     supervisedAlgorithms: [],
     unsupervisedAlgorithms: [],
+    regularizationTechnqiues: []
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -22,19 +26,25 @@ const MachineLearning = () => {
     const fetchData = async () => {
       try {
         const [
+          //add here
           dataPreprocessing,
           supervisedAlgorithms,
           unsupervisedAlgorithms,
+          regularizationTechnqiues,
         ] = await Promise.all([
+          //add here
           get_dataPreprocessing_data(),
           get_Supervised_algorithms_data(),
           get_Unsupervised_algorithms_data(),
+          get_Regularization_technqiues_data()
         ]);
 
         setData({
+          //add here
           dataPreprocessing,
           supervisedAlgorithms,
           unsupervisedAlgorithms,
+          regularizationTechnqiues,
         });
       } catch (err) {
         setError("Failed to load data");
@@ -56,6 +66,7 @@ const MachineLearning = () => {
   if (error) return <p>{error}</p>;
 
   return (
+    //add here
     <>
       <AppleCardsCarouselDemo
         name="Data Preprocessing"
@@ -68,6 +79,10 @@ const MachineLearning = () => {
       <AppleCardsCarouselDemo
         name="Unsupervised Algorithms"
         data={data.unsupervisedAlgorithms}
+      />
+      <AppleCardsCarouselDemo
+        name="Regularization Techniques"
+        data={data.regularizationTechnqiues}
       />
     </>
   );

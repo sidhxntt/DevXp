@@ -1,6 +1,7 @@
 import { BentoGrid, BentoGridItem } from "./BentoGrid";
 import { SiTypescript, SiAnaconda, SiTensorflow } from "react-icons/si";
-import { FaReact, FaAws, FaCloud, FaBitcoin } from "react-icons/fa";
+import { FaReact, FaCloud, FaBitcoin } from "react-icons/fa";
+import { FaDatabase } from "react-icons/fa6";
 import { DiLinux } from "react-icons/di";
 import { VscVscodeInsiders } from "react-icons/vsc";
 
@@ -65,14 +66,14 @@ const items = [
     title: "AWS",
     description: "Join the quest for understanding and enlightenment.",
     header: <Skeleton  image={"/aws.jpeg"}/>,
-    icon: <FaAws className="h-4 w-4 text-neutral-500" />,
+    icon: <FaCloud className="h-4 w-4 text-neutral-500" />,
     path: "aws",
   },
   {
-    title: "System Design",
+    title: "Databases",
     description: "Experience the thrill of bringing ideas to life.",
-    header: <Skeleton image={"/sd.jpeg"}/>,
-    icon: <FaCloud className="h-4 w-4 text-neutral-500" />,
+    header: <Skeleton image={"/db.jpeg"}/>,
+    icon: <FaDatabase className="h-4 w-4 text-neutral-500" />,
     path: "system-design",
   },
   {
