@@ -4,6 +4,8 @@ import { FaReact, FaCloud, FaBitcoin } from "react-icons/fa";
 import { FaDatabase } from "react-icons/fa6";
 import { DiLinux } from "react-icons/di";
 import { VscVscodeInsiders } from "react-icons/vsc";
+import Image from "next/image";
+
 
 export function BentoGridDemo() {
   return (
@@ -25,9 +27,11 @@ export function BentoGridDemo() {
 
 const Skeleton = ({ image }) => (
   <div className="relative w-full h-full min-h-[6rem] rounded-xl overflow-hidden bg-gradient-to-br from-neutral-200 dark:from-neutral-900 dark:to-neutral-800 to-neutral-100">
-    <img
+    <Image
       src={image}
       alt="Skeleton Image"
+      width={500}
+      height={500}
       className="absolute inset-0 w-full h-full object-cover"
     />
   </div>
@@ -74,7 +78,7 @@ const items = [
     description: "Experience the thrill of bringing ideas to life.",
     header: <Skeleton image={"/db.jpeg"}/>,
     icon: <FaDatabase className="h-4 w-4 text-neutral-500" />,
-    path: "system-design",
+    path: "databases",
   },
   {
     title: "Web 3.0",

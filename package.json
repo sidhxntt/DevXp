@@ -15,6 +15,7 @@
     "@mui/material": "^5.16.5",
     "@radix-ui/react-hover-card": "^1.1.1",
     "@tabler/icons-react": "^3.11.0",
+    "algoliasearch": "^4.24.0",
     "clsx": "^2.1.1",
     "contentful": "^10.12.15",
     "framer-motion": "^11.3.18",
