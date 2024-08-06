@@ -67,11 +67,11 @@ const items = [
     path: "machine-learning",
   },
   {
-    title: "AWS",
+    title: "Cloud Computing",
     description: "Join the quest for understanding and enlightenment.",
     header: <Skeleton  image={"/aws.jpeg"}/>,
     icon: <FaCloud className="h-4 w-4 text-neutral-500" />,
-    path: "aws",
+    path: "cloud-computing",
   },
   {
     title: "Databases",
@@ -81,25 +81,11 @@ const items = [
     path: "databases",
   },
   {
-    title: "Web 3.0",
-    description: "Experience the thrill of bringing ideas to life.",
-    header: <Skeleton image={"/web3.jpeg"}/>,
-    icon: <FaBitcoin className="h-4 w-4 text-neutral-500" />,
-    path: "web3",
-  },
-  {
-    title: "Productivity",
-    description: "Experience the thrill of bringing ideas to life.",
-    header: <Skeleton image={"/productivity.jpeg"}/>,
-    icon: <VscVscodeInsiders className="h-4 w-4 text-neutral-500" />,
-    path: "productivity",
-  },
-  {
     title: "Deep Learning",
     description: "Experience the thrill of bringing ideas to life.",
     header: <Skeleton image={"/DL.jpeg"}/>,
     icon: <SiTensorflow className="h-4 w-4 text-neutral-500" />,
-    path: "productivity",
+    path: "deep-learning",
   },
 
 ];

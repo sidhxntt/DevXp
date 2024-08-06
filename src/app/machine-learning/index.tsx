@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import { AppleCardsCarouselDemo } from "@/Components/Carousal";
 import {
-  //add here
   get_Supervised_algorithms_data,
   get_Unsupervised_algorithms_data,
   get_dataPreprocessing_data,
@@ -12,27 +11,25 @@ import GradientCircularProgress from "@/Components/Loader/Loader";
 
 
 const MachineLearning = () => {
+  // Initialize the state with correct types
   const [data, setData] = useState({
-    //add here
     dataPreprocessing: [],
     supervisedAlgorithms: [],
     unsupervisedAlgorithms: [],
     regularizationTechnqiues: []
   });
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const [
-          //add here
           dataPreprocessing,
           supervisedAlgorithms,
           unsupervisedAlgorithms,
           regularizationTechnqiues,
         ] = await Promise.all([
-          //add here
           get_dataPreprocessing_data(),
           get_Supervised_algorithms_data(),
           get_Unsupervised_algorithms_data(),
@@ -40,7 +37,6 @@ const MachineLearning = () => {
         ]);
 
         setData({
-          //add here
           dataPreprocessing,
           supervisedAlgorithms,
           unsupervisedAlgorithms,
@@ -49,8 +45,7 @@ const MachineLearning = () => {
       } catch (err) {
         setError("Failed to load data");
         console.error(err);
-      } 
-      finally {
+      } finally {
         setLoading(false);
       }
     };
@@ -58,15 +53,19 @@ const MachineLearning = () => {
     fetchData();
   }, []);
 
-  if (loading) return(
-    <div className="flex justify-center items-center h-96">
-      <GradientCircularProgress/>
-    </div>
-  )
-  if (error) return <p>{error}</p>;
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-96">
+        <GradientCircularProgress />
+      </div>
+    );
+  }
+
+  if (error) {
+    return <p>{error}</p>;
+  }
 
   return (
-    //add here
     <>
       <AppleCardsCarouselDemo
         name="Data Preprocessing"
