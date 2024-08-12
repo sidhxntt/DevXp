@@ -6,7 +6,7 @@ import Image, { ImageProps } from "next/image";
 import { useOutsideClick } from "@/hooks/use-outside-click";
 import { IconX } from "@tabler/icons-react";
 import { CiTimer } from "react-icons/ci";
-import ReactMarkdown from "react-markdown"
+
 
 import React, {
   useEffect,
