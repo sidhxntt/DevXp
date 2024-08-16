@@ -74,11 +74,11 @@ const items = [
     path: "cloud-computing",
   },
   {
-    title: "Databases",
+    title: "Database Management Systems",
     description: "Experience the thrill of bringing ideas to life.",
     header: <Skeleton image={"/db.jpeg"}/>,
     icon: <FaDatabase className="h-4 w-4 text-neutral-500" />,
-    path: "databases",
+    path: "dbms",
   },
   {
     title: "Deep Learning",

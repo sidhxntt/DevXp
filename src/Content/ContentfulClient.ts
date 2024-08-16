@@ -3,8 +3,8 @@ import { createClient } from "contentful";
 const createConnection = async () => {
   try {
     const client = createClient({
-      space: "pck04d18e2o1",
-      accessToken: "2AHigTyYL2481suTvHgSVl_xrd5pNwaac-dxyyxzEa8",
+      space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID!,
+      accessToken: process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN!,
     });
     return client;
   } catch (error) {

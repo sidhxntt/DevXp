@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { BLOCKS, INLINES, MARKS } from "@contentful/rich-text-types";
 import { LinkPreview } from "@/Components/LinkPreview/LinkPreview";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 const renderOptions = {
   renderNode: {
@@ -9,7 +11,7 @@ const renderOptions = {
       const { url, contentType, details } = file;
 
       // Check if the asset is an image or video based on the contentType
-      if (contentType.startsWith('image/')) {
+      if (contentType.startsWith("image/")) {
         // Handle image
         const { width, height } = details.image;
         return (
@@ -22,11 +24,13 @@ const renderOptions = {
             />
           </div>
         );
-      } else if (contentType.startsWith('video/')) {
+      } else if (contentType.startsWith("video/")) {
         // Handle video as iframe
         const videoUrl = `https:${url}`;
         return (
-          <div className="relative pb-16/9"> {/* Aspect ratio 16:9 */}
+          <div className="relative pb-16/9">
+            {" "}
+            {/* Aspect ratio 16:9 */}
             <iframe
               src={videoUrl}
               title={title || "Contentful Video"}
@@ -43,25 +47,24 @@ const renderOptions = {
       );
     },
 
-    [INLINES.HYPERLINK]: node => {
-      const text = node.content.find(item => item.nodeType === 'text')?.value;
+    [INLINES.HYPERLINK]: (node) => {
+      const text = node.content.find((item) => item.nodeType === "text")?.value;
       return (
         <LinkPreview url={node.data.uri} className="font-bold">
-        {text}
+          {text}
         </LinkPreview>
       );
     },
-
   },
 
   renderMark: {
-    [MARKS.CODE]: text => {
+    [MARKS.CODE]: (text) => {
       return (
-        <pre>
-          <code>{text}</code>
-        </pre>
+        <SyntaxHighlighter language={"sql"|| "python"} style={vscDarkPlus} wrapLines>
+          {text}
+        </SyntaxHighlighter>
       );
-    }
+    },
   },
 };
 

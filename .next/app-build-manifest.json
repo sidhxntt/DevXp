@@ -1,52 +1,40 @@
 {
   "pages": {
-    "/_not-found/page": [
-      "static/chunks/webpack-7b7d8bc08f537075.js",
-      "static/chunks/fd9d1056-c176ba62bfa905c4.js",
-      "static/chunks/23-32c0ff0e1512de79.js",
-      "static/chunks/main-app-40aea93bbe936984.js",
-      "static/chunks/app/_not-found/page-4475c7182703d691.js"
+    "/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/page.js"
     ],
     "/layout": [
-      "static/chunks/webpack-7b7d8bc08f537075.js",
-      "static/chunks/fd9d1056-c176ba62bfa905c4.js",
-      "static/chunks/23-32c0ff0e1512de79.js",
-      "static/chunks/main-app-40aea93bbe936984.js",
-      "static/css/49db847cac91221c.css",
-      "static/chunks/30-8b1cd6375c5da34f.js",
-      "static/chunks/app/layout-20f4dcccffc7e4e1.js"
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/layout.css",
+      "static/chunks/app/layout.js"
     ],
-    "/page": [
-      "static/chunks/webpack-7b7d8bc08f537075.js",
-      "static/chunks/fd9d1056-c176ba62bfa905c4.js",
-      "static/chunks/23-32c0ff0e1512de79.js",
-      "static/chunks/main-app-40aea93bbe936984.js",
-      "static/chunks/30-8b1cd6375c5da34f.js",
-      "static/chunks/app/page-688e41796a940229.js"
+    "/not-found": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/not-found.js"
+    ],
+    "/deep-learning/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/deep-learning/page.js"
     ],
     "/machine-learning/page": [
-      "static/chunks/webpack-7b7d8bc08f537075.js",
-      "static/chunks/fd9d1056-c176ba62bfa905c4.js",
-      "static/chunks/23-32c0ff0e1512de79.js",
-      "static/chunks/main-app-40aea93bbe936984.js",
-      "static/chunks/e34aaff9-ea9a726d58c01db2.js",
-      "static/chunks/49d9ad54-0480a46995b9ae10.js",
-      "static/chunks/30-8b1cd6375c5da34f.js",
-      "static/chunks/734-7f93ce999c400029.js",
-      "static/chunks/497-3b211b245f70fa3b.js",
-      "static/chunks/app/machine-learning/page-076f8399b72f501c.js"
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/machine-learning/page.js"
     ],
-    "/databases/page": [
-      "static/chunks/webpack-7b7d8bc08f537075.js",
-      "static/chunks/fd9d1056-c176ba62bfa905c4.js",
-      "static/chunks/23-32c0ff0e1512de79.js",
-      "static/chunks/main-app-40aea93bbe936984.js",
-      "static/chunks/e34aaff9-ea9a726d58c01db2.js",
-      "static/chunks/49d9ad54-0480a46995b9ae10.js",
-      "static/chunks/30-8b1cd6375c5da34f.js",
-      "static/chunks/734-7f93ce999c400029.js",
-      "static/chunks/497-3b211b245f70fa3b.js",
-      "static/chunks/app/databases/page-7cc6bb9bff1a0fb3.js"
+    "/dbms/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/dbms/page.js"
+    ],
+    "/_not-found/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/_not-found/page.js"
     ]
   }
 }

@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { AppleCardsCarouselDemo } from "@/Components/Carousal";
 import {
+    //add here
   get_Supervised_algorithms_data,
   get_Unsupervised_algorithms_data,
   get_dataPreprocessing_data,
@@ -13,6 +14,7 @@ import GradientCircularProgress from "@/Components/Loader/Loader";
 const MachineLearning = () => {
   // Initialize the state with correct types
   const [data, setData] = useState({
+      //add here
     dataPreprocessing: [],
     supervisedAlgorithms: [],
     unsupervisedAlgorithms: [],
@@ -25,11 +27,13 @@ const MachineLearning = () => {
     const fetchData = async () => {
       try {
         const [
+            //add here
           dataPreprocessing,
           supervisedAlgorithms,
           unsupervisedAlgorithms,
           regularizationTechnqiues,
         ] = await Promise.all([
+            //add here
           get_dataPreprocessing_data(),
           get_Supervised_algorithms_data(),
           get_Unsupervised_algorithms_data(),
@@ -37,6 +41,7 @@ const MachineLearning = () => {
         ]);
 
         setData({
+            //add here
           dataPreprocessing,
           supervisedAlgorithms,
           unsupervisedAlgorithms,
@@ -67,6 +72,7 @@ const MachineLearning = () => {
 
   return (
     <>
+    {/*  add here */}
       <AppleCardsCarouselDemo
         name="Data Preprocessing"
         data={data.dataPreprocessing}
