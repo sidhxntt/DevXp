@@ -3,19 +3,18 @@ import React, { useEffect, useState } from "react";
 import { AppleCardsCarouselDemo } from "@/Components/Carousal";
 import {
   //add here
-  get_supervisedAlgorithmsDeepLearning_data,
-  get_unsupervisedAlgorithmsDeepLearning_data
+  get_cloudcomputing_data,
+  get_AWS_data,
 
-} from "@/Content/deep-learning";
+} from "@/Content/CloudComputing";
 import GradientCircularProgress from "@/Components/Loader/Loader";
 
 
-const DeepLearning = () => {
+const CloudComputing = () => {
   const [data, setData] = useState({
     //add here
-    supervised: [],
-    unsupervised: [],
-
+    cloud_computing: [],
+    AWS: [],
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -25,18 +24,18 @@ const DeepLearning = () => {
       try {
         const [
           //add here
-          supervised,
-          unsupervised
+          cloud_computing,
+          AWS,
         ] = await Promise.all([
           //add here
-          get_supervisedAlgorithmsDeepLearning_data(),
-          get_unsupervisedAlgorithmsDeepLearning_data(),
+          get_cloudcomputing_data(),
+          get_AWS_data(),
         ]);
 
         setData({
           //add here
-          supervised,
-          unsupervised
+          cloud_computing,
+          AWS,
         });
       } catch (err) {
         setError("Failed to load data");
@@ -61,15 +60,15 @@ const DeepLearning = () => {
     //add here
     <>
       <AppleCardsCarouselDemo
-        name="Supervised Learning"
-        data={data.supervised}
+        name="Cloud Computing"
+        data={data.cloud_computing}
       />
       <AppleCardsCarouselDemo
-        name="Unsupervised Learning"
-        data={data.unsupervised}
+        name="AWS"
+        data={data.AWS}
       />
     </>
   );
 };
 
-export default DeepLearning;
+export default CloudComputing;
