@@ -6,7 +6,7 @@ import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 const renderOptions = {
   renderNode: {
-    [BLOCKS.EMBEDDED_ASSET]: (node) => {
+    [BLOCKS.EMBEDDED_ASSET]: (node:any) => {
       const { title, file } = node.data.target.fields;
       const { url, contentType, details } = file;
 
@@ -47,8 +47,8 @@ const renderOptions = {
       );
     },
 
-    [INLINES.HYPERLINK]: (node) => {
-      const text = node.content.find((item) => item.nodeType === "text")?.value;
+    [INLINES.HYPERLINK]: (node: any) => {
+      const text = node.content.find((item:any) => item.nodeType === "text")?.value;
       return (
         <LinkPreview url={node.data.uri} className="font-bold">
           {text}
@@ -58,7 +58,7 @@ const renderOptions = {
   },
 
   renderMark: {
-    [MARKS.CODE]: (text) => {
+    [MARKS.CODE]: (text:any) => {
       return (
         <SyntaxHighlighter language={"sql"|| "python"} style={vscDarkPlus} wrapLines>
           {text}

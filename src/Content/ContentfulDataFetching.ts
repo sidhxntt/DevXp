@@ -1,26 +1,5 @@
 import createConnection from "./ContentfulClient";
 
-// Define interfaces for Contentful data
-interface ContentfulFields {
-  readingTime: number;
-  title: string;
-  thumbnail?: {
-    fields: {
-      file: {
-        url: string;
-      };
-    };
-  };
-  content: string;
-}
-
-interface ContentfulItem {
-  fields: ContentfulFields;
-}
-
-interface ContentfulResponse {
-  items: ContentfulItem[];
-}
 
 // Define the type for the mapped entry
 interface MappedEntry {
@@ -31,7 +10,7 @@ interface MappedEntry {
 }
 
 // Map Contentful entries to the desired format
-const mapEntries = (items: ContentfulItem[]): MappedEntry[] => {
+const mapEntries = (items: any[]): MappedEntry[] => {
   return items.map((item) => {
     const fields = item.fields;
     const thumbnail = fields.thumbnail?.fields.file?.url;
@@ -54,7 +33,7 @@ const fetchContentfulData = async (contentType: string): Promise<MappedEntry[] |
       throw new Error("Contentful client is undefined");
     }
     
-    const res: ContentfulResponse = await client.getEntries({ content_type: contentType });
+    const res: any = await client.getEntries({ content_type: contentType });
     
     // Handle response and map entries
     return mapEntries(res.items);
@@ -64,3 +43,4 @@ const fetchContentfulData = async (contentType: string): Promise<MappedEntry[] |
 };
 
 export default fetchContentfulData;
+export type {MappedEntry}

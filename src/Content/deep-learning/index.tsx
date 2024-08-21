@@ -5,5 +5,5 @@ const get_unsupervisedAlgorithmsDeepLearning_data = () => fetchContentfulData('u
 
 export  {
     get_supervisedAlgorithmsDeepLearning_data,
-    get_unsupervisedAlgorithmsDeepLearning_data
+    get_unsupervisedAlgorithmsDeepLearning_data,
 };

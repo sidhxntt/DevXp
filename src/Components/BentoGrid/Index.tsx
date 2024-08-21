@@ -3,9 +3,11 @@ import { SiTypescript, SiAnaconda, SiTensorflow } from "react-icons/si";
 import { FaReact, FaCloud, FaBitcoin } from "react-icons/fa";
 import { FaDatabase } from "react-icons/fa6";
 import { DiLinux } from "react-icons/di";
-import { VscVscodeInsiders } from "react-icons/vsc";
 import Image from "next/image";
 
+interface SkeletonProps {
+  image: string;
+}
 
 export function BentoGridDemo() {
   return (
@@ -25,14 +27,14 @@ export function BentoGridDemo() {
   );
 }
 
-const Skeleton = ({ image }) => (
+const Skeleton: React.FC<SkeletonProps> = ({ image }) => (
   <div className="relative w-full h-full min-h-[6rem] rounded-xl overflow-hidden bg-gradient-to-br from-neutral-200 dark:from-neutral-900 dark:to-neutral-800 to-neutral-100">
     <Image
       src={image}
       alt="Skeleton Image"
-      width={500}
-      height={500}
-      className="absolute inset-0 w-full h-full object-cover"
+      layout="fill" // Ensures the image fills the container
+      objectFit="cover" // Ensures the image covers the container without distortion
+      className="absolute inset-0 w-full h-full"
     />
   </div>
 );

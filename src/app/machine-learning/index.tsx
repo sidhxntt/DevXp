@@ -2,23 +2,30 @@
 import React, { useEffect, useState } from "react";
 import { AppleCardsCarouselDemo } from "@/Components/Carousal";
 import {
-    //add here
+  // add here
   get_Supervised_algorithms_data,
   get_Unsupervised_algorithms_data,
   get_dataPreprocessing_data,
   get_Regularization_technqiues_data,
 } from "@/Content/machine-learning";
 import GradientCircularProgress from "@/Components/Loader/Loader";
+import { MappedEntry } from "@/Content/ContentfulDataFetching";
 
+interface DataState {
+  // add here
+  dataPreprocessing: MappedEntry[];
+  supervisedAlgorithms: MappedEntry[];
+  unsupervisedAlgorithms: MappedEntry[];
+  regularizationTechnqiues: MappedEntry[];
+}
 
 const MachineLearning = () => {
-  // Initialize the state with correct types
-  const [data, setData] = useState({
-      //add here
+  const [data, setData] = useState<DataState>({
+    // add here
     dataPreprocessing: [],
     supervisedAlgorithms: [],
     unsupervisedAlgorithms: [],
-    regularizationTechnqiues: []
+    regularizationTechnqiues: [],
   });
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -27,25 +34,25 @@ const MachineLearning = () => {
     const fetchData = async () => {
       try {
         const [
-            //add here
+          // add here
           dataPreprocessing,
           supervisedAlgorithms,
           unsupervisedAlgorithms,
           regularizationTechnqiues,
         ] = await Promise.all([
-            //add here
+          // add here
           get_dataPreprocessing_data(),
           get_Supervised_algorithms_data(),
           get_Unsupervised_algorithms_data(),
-          get_Regularization_technqiues_data()
+          get_Regularization_technqiues_data(),
         ]);
 
         setData({
-            //add here
-          dataPreprocessing,
-          supervisedAlgorithms,
-          unsupervisedAlgorithms,
-          regularizationTechnqiues,
+          // add here
+          dataPreprocessing: dataPreprocessing || [],
+          supervisedAlgorithms: supervisedAlgorithms || [],
+          unsupervisedAlgorithms: unsupervisedAlgorithms || [],
+          regularizationTechnqiues: regularizationTechnqiues || [],
         });
       } catch (err) {
         setError("Failed to load data");
@@ -71,24 +78,13 @@ const MachineLearning = () => {
   }
 
   return (
+    // add here
+
     <>
-    {/*  add here */}
-      <AppleCardsCarouselDemo
-        name="Data Preprocessing"
-        data={data.dataPreprocessing}
-      />
-      <AppleCardsCarouselDemo
-        name="Supervised Algorithms"
-        data={data.supervisedAlgorithms}
-      />
-      <AppleCardsCarouselDemo
-        name="Unsupervised Algorithms"
-        data={data.unsupervisedAlgorithms}
-      />
-      <AppleCardsCarouselDemo
-        name="Regularization Techniques"
-        data={data.regularizationTechnqiues}
-      />
+      <AppleCardsCarouselDemo name="Data Preprocessing" data={data.dataPreprocessing}/>
+      <AppleCardsCarouselDemo name="Supervised Algorithms" data={data.supervisedAlgorithms}/>
+      <AppleCardsCarouselDemo name="Unsupervised Algorithms" data={data.unsupervisedAlgorithms}/>
+      <AppleCardsCarouselDemo name="Regularization Techniques" data={data.regularizationTechnqiues}/>
     </>
   );
 };
