@@ -3,6 +3,9 @@
   "/page": "app/page.js",
   "/dbms/page": "app/dbms/page.js",
   "/deep-learning/page": "app/deep-learning/page.js",
-  "/machine-learning/page": "app/machine-learning/page.js",
-  "/cloud-computing/page": "app/cloud-computing/page.js"
+  "/cloud-computing/page": "app/cloud-computing/page.js",
+  "/backend/page": "app/backend/page.js",
+  "/devops/page": "app/devops/page.js",
+  "/frontend/page": "app/frontend/page.js",
+  "/machine-learning/page": "app/machine-learning/page.js"
 }
