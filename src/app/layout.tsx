@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/Components/Navbar/Navbar";
-import Script from 'next/script';
 
 export const metadata: Metadata = {
   title: "DevXP | Home",
@@ -21,15 +20,9 @@ export default function RootLayout({
         <link rel="icon" href="/Blogo.png" />
       </head>
       <body>
-        <Navbar />
-        {children}
-        <Script
-          src="https://code.responsivevoice.org/responsivevoice.js?key=y1pvvQlB"
-          strategy="afterInteractive" // Load script after interactive content
-        />
+          <Navbar />
+          {children}
       </body>
     </html>
   );
 }
-{/* <script src="https://code.responsivevoice.org/responsivevoice.js?key=YOUR_KEY"></script>
-<button onclick="responsiveVoice.speak('Hello world!')">Read Text</button> */}

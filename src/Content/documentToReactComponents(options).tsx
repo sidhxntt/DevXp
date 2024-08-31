@@ -76,10 +76,11 @@ const renderOptions = {
             "yaml" ||
             "docker" ||
             "scss" ||
-            "nginix" ||
+            "nginx" ||
             "hcl" ||
             "groovy" ||
-            "json"
+            "json" ||
+            "graphql"
           }
           style={vscDarkPlus}
           wrapLines
