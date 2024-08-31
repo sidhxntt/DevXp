@@ -31,7 +31,7 @@
       "static/chunks/30-95fabf1334b2eef7.js",
       "static/chunks/app/page-b3243e9a9b61e3e5.js"
     ],
-    "/cloud-computing/page": [
+    "/devops/page": [
       "static/chunks/webpack-facfb64f78722460.js",
       "static/chunks/fd9d1056-fb4a8cdfa2853b0e.js",
       "static/chunks/23-7a00742a424207f4.js",
@@ -41,31 +41,7 @@
       "static/chunks/30-95fabf1334b2eef7.js",
       "static/chunks/385-7e3d57db66eebebe.js",
       "static/chunks/394-8ed62f78a9dd786f.js",
-      "static/chunks/app/cloud-computing/page-9e6e5dd5c9b72079.js"
-    ],
-    "/backend/page": [
-      "static/chunks/webpack-facfb64f78722460.js",
-      "static/chunks/fd9d1056-fb4a8cdfa2853b0e.js",
-      "static/chunks/23-7a00742a424207f4.js",
-      "static/chunks/main-app-27b4998e3f3d8d62.js",
-      "static/chunks/e34aaff9-18ad1bc147ebe56b.js",
-      "static/chunks/49d9ad54-bdd2d629c065c481.js",
-      "static/chunks/30-95fabf1334b2eef7.js",
-      "static/chunks/385-7e3d57db66eebebe.js",
-      "static/chunks/394-8ed62f78a9dd786f.js",
-      "static/chunks/app/backend/page-bc2c0bd44a349335.js"
-    ],
-    "/dbms/page": [
-      "static/chunks/webpack-facfb64f78722460.js",
-      "static/chunks/fd9d1056-fb4a8cdfa2853b0e.js",
-      "static/chunks/23-7a00742a424207f4.js",
-      "static/chunks/main-app-27b4998e3f3d8d62.js",
-      "static/chunks/e34aaff9-18ad1bc147ebe56b.js",
-      "static/chunks/49d9ad54-bdd2d629c065c481.js",
-      "static/chunks/30-95fabf1334b2eef7.js",
-      "static/chunks/385-7e3d57db66eebebe.js",
-      "static/chunks/394-8ed62f78a9dd786f.js",
-      "static/chunks/app/dbms/page-b5e8af693603f60c.js"
+      "static/chunks/app/devops/page-19d2fcc2e38069f6.js"
     ],
     "/deep-learning/page": [
       "static/chunks/webpack-facfb64f78722460.js",
@@ -79,7 +55,7 @@
       "static/chunks/394-8ed62f78a9dd786f.js",
       "static/chunks/app/deep-learning/page-eb34a28be39105aa.js"
     ],
-    "/devops/page": [
+    "/backend/page": [
       "static/chunks/webpack-facfb64f78722460.js",
       "static/chunks/fd9d1056-fb4a8cdfa2853b0e.js",
       "static/chunks/23-7a00742a424207f4.js",
@@ -89,7 +65,31 @@
       "static/chunks/30-95fabf1334b2eef7.js",
       "static/chunks/385-7e3d57db66eebebe.js",
       "static/chunks/394-8ed62f78a9dd786f.js",
-      "static/chunks/app/devops/page-19d2fcc2e38069f6.js"
+      "static/chunks/app/backend/page-bc2c0bd44a349335.js"
+    ],
+    "/cloud-computing/page": [
+      "static/chunks/webpack-facfb64f78722460.js",
+      "static/chunks/fd9d1056-fb4a8cdfa2853b0e.js",
+      "static/chunks/23-7a00742a424207f4.js",
+      "static/chunks/main-app-27b4998e3f3d8d62.js",
+      "static/chunks/e34aaff9-18ad1bc147ebe56b.js",
+      "static/chunks/49d9ad54-bdd2d629c065c481.js",
+      "static/chunks/30-95fabf1334b2eef7.js",
+      "static/chunks/385-7e3d57db66eebebe.js",
+      "static/chunks/394-8ed62f78a9dd786f.js",
+      "static/chunks/app/cloud-computing/page-9e6e5dd5c9b72079.js"
+    ],
+    "/dbms/page": [
+      "static/chunks/webpack-facfb64f78722460.js",
+      "static/chunks/fd9d1056-fb4a8cdfa2853b0e.js",
+      "static/chunks/23-7a00742a424207f4.js",
+      "static/chunks/main-app-27b4998e3f3d8d62.js",
+      "static/chunks/e34aaff9-18ad1bc147ebe56b.js",
+      "static/chunks/49d9ad54-bdd2d629c065c481.js",
+      "static/chunks/30-95fabf1334b2eef7.js",
+      "static/chunks/385-7e3d57db66eebebe.js",
+      "static/chunks/394-8ed62f78a9dd786f.js",
+      "static/chunks/app/dbms/page-b5e8af693603f60c.js"
     ],
     "/frontend/page": [
       "static/chunks/webpack-facfb64f78722460.js",
