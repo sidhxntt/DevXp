@@ -1,12 +1,11 @@
 "use client";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
-import Image, { ImageProps } from "next/image";
-import { useOutsideClick } from "@/hooks/use-outside-click";
+import { useOutsideClick } from "../../hooks/use-outside-click";
 import { IconX } from "@tabler/icons-react";
 import { CiTimer } from "react-icons/ci";
-
+import { Document } from "@contentful/rich-text-types";
 
 import React, {
   useEffect,
@@ -15,7 +14,7 @@ import React, {
   createContext,
   useContext,
 } from "react";
-import renderOptions from "@/Content/documentToReactComponents(options)";
+import renderOptions from "../../Content/documentToReactComponents(options)";
 
 interface CarouselProps {
   items: JSX.Element[];
@@ -26,7 +25,7 @@ type Card = {
   src: string;
   title: string;
   reading_time: string;
-  content: any;
+  content: Document;
 };
 
 export const CarouselContext = createContext<{
@@ -39,8 +38,8 @@ export const CarouselContext = createContext<{
 
 export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
   const carouselRef = React.useRef<HTMLDivElement>(null);
-  const [canScrollLeft, setCanScrollLeft] = React.useState(false);
-  const [canScrollRight, setCanScrollRight] = React.useState(true);
+  const [, setCanScrollLeft] = React.useState(false);
+  const [, setCanScrollRight] = React.useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
@@ -137,7 +136,7 @@ export const Card = ({
 }) => {
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const { onCardClose, currentIndex } = useContext(CarouselContext);
+  const { onCardClose, } = useContext(CarouselContext);
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
@@ -154,7 +153,7 @@ export const Card = ({
 
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [open]);
+  }, );
 
   useOutsideClick(containerRef, () => handleClose());
 
@@ -241,7 +240,6 @@ export const Card = ({
         <BlurImage
           src={card.src}
           alt={card.title}
-          fill
           className="object-cover absolute z-10 inset-0"
         />
       </motion.button>
@@ -255,25 +253,36 @@ export const BlurImage = ({
   src,
   className,
   alt,
-  ...rest
-}: ImageProps) => {
-  const [isLoading, setLoading] = useState(true);
+}: {
+  height?: number;
+  width?: number;
+  src: string;
+  className: string;
+  alt: string;
+}) => {
   return (
-    <Image
+    <div
       className={cn(
-        "transition duration-300 brightness-50",
-        isLoading ? "blur-sm" : "blur-0",
+        "relative bg-gray-100 dark:bg-gray-800 z-10 w-full",
         className
       )}
-      onLoad={() => setLoading(false)}
-      src={src}
-      width={width}
-      height={height}
-      loading="lazy"
-      decoding="async"
-      blurDataURL={typeof src === "string" ? src : undefined}
-      alt={alt ? alt : "Background of a beautiful view"}
-      {...rest}
-    />
+      style={{
+        height: height ?? "auto",
+        width: width ?? "100%",
+      }}
+    >
+      <img
+        src={src}
+        alt={alt}
+        className={cn(
+          "duration-700 ease-in-out absolute inset-0 object-cover brightness-50",
+          className
+        )}
+        style={{
+          height: height ?? "100%",
+          width: width ?? "100%",
+        }}
+      />
+    </div>
   );
 };

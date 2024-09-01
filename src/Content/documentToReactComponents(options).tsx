@@ -1,6 +1,6 @@
-import Image from "next/image";
+
 import { BLOCKS, INLINES, MARKS } from "@contentful/rich-text-types";
-import { LinkPreview } from "@/Components/LinkPreview/LinkPreview";
+import { LinkPreview } from "../Components/LinkPreview/LinkPreview";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 
@@ -16,7 +16,7 @@ const renderOptions = {
         const { width, height } = details.image;
         return (
           <div>
-            <Image
+            <img
               src={`https:${url}`}
               alt={title || "Contentful Asset"}
               width={width}

@@ -1,11 +1,10 @@
 import createConnection from "./ContentfulClient";
 
-
 // Define the type for the mapped entry
 interface MappedEntry {
   reading_time: number;
   title: string;
-  src: string | null;
+  src: string | null;  // Allow null for src
   content: string;
 }
 
@@ -15,10 +14,10 @@ const mapEntries = (items: any[]): MappedEntry[] => {
     const fields = item.fields;
     const thumbnail = fields.thumbnail?.fields.file?.url;
     return {
-      reading_time: fields.readingTime,
-      title: fields.title,
-      src: thumbnail ? `https:${thumbnail}` : null, // Handle missing thumbnail
-      content: fields.content,
+      reading_time: fields.readingTime || 0,  // Provide a default value
+      title: fields.title || "",  // Provide a default value
+      src: thumbnail ? `https:${thumbnail}` : null,
+      content: fields.content || "",  // Provide a default value
     };
   });
 };
@@ -43,4 +42,4 @@ const fetchContentfulData = async (contentType: string): Promise<MappedEntry[] |
 };
 
 export default fetchContentfulData;
-export type {MappedEntry}
+export type { MappedEntry };

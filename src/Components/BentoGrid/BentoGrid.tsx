@@ -1,5 +1,5 @@
-import { cn } from "@/lib/utils";
-import Link from "next/link";
+import { cn } from "../../lib/utils"
+import { Link } from "react-router-dom"; 
 
 export const BentoGrid = ({
   className,
@@ -42,7 +42,7 @@ export const BentoGridItem = ({
         className
       )}
     >
-      <Link href={`${path}`}>
+      <Link to={`${path}`}>
         {header}
         <div className="mt-2 group-hover/bento:translate-x-2 transition duration-200">
           {icon}
