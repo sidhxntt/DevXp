@@ -27,7 +27,7 @@ export function BentoGridDemo() {
 }
 
 const Skeleton: React.FC<SkeletonProps> = ({ image }) => (
-  <div className="relative w-full h-full min-h-[6rem] rounded-xl overflow-hidden bg-gradient-to-br from-neutral-200 dark:from-neutral-900 dark:to-neutral-800 to-neutral-100">
+  <div className="relative w-full h-full min-h-[6rem] rounded-xl overflow-hidden bg-gradient-to-br from-neutral-900 to-neutral-800 ">
     <img
       src={image}
       alt="Skeleton Image"

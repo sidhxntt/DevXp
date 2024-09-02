@@ -6,7 +6,7 @@ import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 const renderOptions = {
   renderNode: {
-    [BLOCKS.EMBEDDED_ASSET]: (node: any) => {
+    [BLOCKS.EMBEDDED_ASSET]: (node: any ) => {
       const { title, file } = node.data.target.fields;
       const { url, contentType, details } = file;
 
@@ -60,27 +60,11 @@ const renderOptions = {
   },
 
   renderMark: {
-    [MARKS.CODE]: (text: any) => {
+    [MARKS.CODE]: (text: string) => {
       return (
         <SyntaxHighlighter
           language={
-            "sql" ||
-            "python" ||
-            "bash" ||
-            "jsx" ||
-            "tsx" ||
-            "typescript" ||
-            "javascript" ||
-            "css" ||
-            "cshtml" ||
-            "yaml" ||
-            "docker" ||
-            "scss" ||
-            "nginx" ||
-            "hcl" ||
-            "groovy" ||
-            "json" ||
-            "graphql"
+            "bash" 
           }
           style={vscDarkPlus}
           wrapLines

@@ -1,5 +1,6 @@
 import { Carousel, Card } from "./Carousal";
 import { MappedEntry } from "../../Content/ContentfulDataFetching";
+import { Document } from "@contentful/rich-text-types";
 
 interface AppleCardsCarouselDemoProps {
   name: string;
@@ -11,7 +12,7 @@ interface CardType {
   reading_time: string;
   title: string;
   src: string;
-  content: string;
+  content: Document;
 }
 
 // Convert MappedEntry to CardType
@@ -35,7 +36,7 @@ export function AppleCardsCarouselDemo({ name, data }: AppleCardsCarouselDemoPro
 
   return (
     <div className="w-full h-full py-20">
-      <h2 className="max-w-7xl pl-4 mx-auto text-xl md:text-5xl font-bold text-neutral-800 dark:text-neutral-200 font-sans">
+      <h2 className="max-w-7xl pl-4 mx-auto text-xl md:text-5xl font-bold text-neutral-200 font-sans">
         {name}
       </h2>
       <Carousel items={cards} />
