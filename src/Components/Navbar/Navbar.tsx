@@ -10,18 +10,18 @@ const Navbar = () => {
           <img src="/Logo.png" alt="Logo" width={100} height={100} />
         </Link>
         <div className="flex items-center space-x-6">
-          <a className="text-white" href="https://x.com/sidhxntt" target="_blank" rel="noopener noreferrer">
+          <Link className="text-white" to="https://x.com/sidhxntt" target="_blank" rel="noopener noreferrer">
             <FaXTwitter />
-          </a>
-          <a className="text-white" href="https://github.com/sidhxntt" target="_blank" rel="noopener noreferrer">
+          </Link>
+          <Link className="text-white" to="https://github.com/sidhxntt" target="_blank" rel="noopener noreferrer">
             <FaGithub />
-          </a>
-          <a className="text-white" href="https://www.linkedin.com/in/siddhant-gupta-885384239/" target="_blank" rel="noopener noreferrer">
+          </Link>
+          <Link className="text-white" to="https://www.linkedin.com/in/siddhant-gupta-885384239/" target="_blank" rel="noopener noreferrer">
             <FaLinkedin />
-          </a>
-          <a className="text-white" href="https://www.instagram.com/siddhant.xo/" target="_blank" rel="noopener noreferrer">
+          </Link>
+          <Link className="text-white" to="https://www.instagram.com/siddhant.xo/" target="_blank" rel="noopener noreferrer">
             <FaInstagram />
-          </a>
+          </Link>
         </div>
       </div>
     </header>

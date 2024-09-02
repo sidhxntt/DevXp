@@ -1,12 +1,13 @@
 import typography from '@tailwindcss/typography';
+import type { Config } from 'tailwindcss';
 
-/** @type {import('tailwindcss').Config} */
-const config = {
+const config: Config = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  darkMode: "class",
   theme: {
     extend: {
       backgroundImage: {
@@ -17,28 +18,13 @@ const config = {
         DEFAULT: {
           css: {
             color: theme('colors.white'),
-            h1: {
-              color: theme('colors.white'),
-            },
-            h2: {
-              color: theme('colors.white'),
-            },
-            h3: {
-              color: theme('colors.white'),
-            },
-            h4: {
-              color: theme('colors.white'),
-            },
-            h5: {
-              color: theme('colors.white'),
-            },
-            h6: {
-              color: theme('colors.white'),
-            },
-            blockquote: {
-              color: theme('colors.white'),
-            },
-            // Custom table styles
+            h1: { color: theme('colors.white') },
+            h2: { color: theme('colors.white') },
+            h3: { color: theme('colors.white') },
+            h4: { color: theme('colors.white') },
+            h5: { color: theme('colors.white') },
+            h6: { color: theme('colors.white') },
+            blockquote: { color: theme('colors.white') },
             table: {
               color: theme('colors.white'),
               borderCollapse: 'collapse',
@@ -46,21 +32,21 @@ const config = {
               marginTop: theme('spacing.4'),
               marginBottom: theme('spacing.4'),
               borderSpacing: '0',
-              border: `1px solid ${theme('colors.gray.700')}`, // Border for the entire table
+              border: `1px solid ${theme('colors.gray.700')}`,
               borderRadius: theme('borderRadius.lg'),
               th: {
-                border: `1px solid ${theme('colors.gray.700')}`, // Border for table headers
+                border: `1px solid ${theme('colors.gray.700')}`,
                 padding: theme('spacing.2'),
                 textAlign: 'left',
                 fontWeight: theme('fontWeight.bold'),
               },
               td: {
-                border: `1px solid ${theme('colors.gray.700')}`, // Border for table cells
+                border: `1px solid ${theme('colors.gray.700')}`,
                 padding: theme('spacing.2'),
               },
               thead: {
                 th: {
-                  backgroundColor: theme('colors.gray.800'), // Background color for the first row
+                  backgroundColor: theme('colors.gray.800'),
                 },
               },
               tbody: {
@@ -68,9 +54,6 @@ const config = {
                   '&:nth-child(1)': {
                     backgroundColor: theme('colors.gray.800'),
                   },
-                  // '&:nth-child(n+2)': {
-                  //   backgroundColor: theme('colors.gray.800'),
-                  // },
                 },
               },
             },
@@ -81,5 +64,6 @@ const config = {
   },
   plugins: [typography],
 };
+
 
 export default config;

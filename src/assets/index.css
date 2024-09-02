@@ -1,14 +1,13 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0; /* Black text color */
-  --background-start-rgb: 0, 0, 0; /* Black background start */
-  --background-end-rgb: 0, 0, 0; /* Black background end */
+  --foreground-rgb: 0, 0, 0; 
+  --background-start-rgb: 0, 0, 0; 
+  --background-end-rgb: 0, 0, 0; 
 }
-
-
 
 body {
   color: rgb(var(--foreground-rgb));

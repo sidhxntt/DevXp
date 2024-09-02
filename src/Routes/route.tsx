@@ -8,12 +8,13 @@ import MachineLearning from './machine-learning';
 import DeepLearning from './deep-learning';
 import CloudComputing from './cloud-computing';
 import Databases from './dbms';
-
+import ErrorBoundary from '../Layouts/ErrorBoundary';
 
 const routes = createBrowserRouter([
   {
     path: '/',
     element: <RootLayout />,
+    errorElement: <ErrorBoundary/>,
     children: [
       {
         path: '',
