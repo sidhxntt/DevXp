@@ -1,4 +1,3 @@
-
 import { BLOCKS, INLINES, MARKS } from "@contentful/rich-text-types";
 import { LinkPreview } from "../Components/LinkPreview/LinkPreview";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -6,7 +5,7 @@ import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 const renderOptions = {
   renderNode: {
-    [BLOCKS.EMBEDDED_ASSET]: (node: any ) => {
+    [BLOCKS.EMBEDDED_ASSET]: (node: any) => {
       const { title, file } = node.data.target.fields;
       const { url, contentType, details } = file;
 
@@ -19,8 +18,8 @@ const renderOptions = {
             <img
               src={`https:${url}`}
               alt={title || "Contentful Asset"}
-              width={width}
-              height={height}
+              width={width || 500}
+              height={height || 500}
             />
           </div>
         );
@@ -60,16 +59,17 @@ const renderOptions = {
   },
 
   renderMark: {
-    [MARKS.CODE]: (text: string) => {
+    [MARKS.CODE]: (text: React.ReactNode) => {
+      // Convert the ReactNode to string if it's not already a string
+      const codeText = typeof text === "string" ? text : String(text);
+
       return (
         <SyntaxHighlighter
-          language={
-            "bash" 
-          }
+          language="bash"
           style={vscDarkPlus}
           wrapLines
         >
-          {text}
+          {codeText}
         </SyntaxHighlighter>
       );
     },
