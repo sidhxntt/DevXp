@@ -3,7 +3,8 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 function GradientCircularProgress() {
   return (
-    <React.Fragment>
+    <div className='flex justify-center items-center h-screen'>
+        <React.Fragment>
       <svg width={0} height={0}>
         <defs>
           <linearGradient id="my_gradient" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -20,6 +21,8 @@ function GradientCircularProgress() {
         }}
       />
     </React.Fragment>
+    </div>
+  
   );
 }
 

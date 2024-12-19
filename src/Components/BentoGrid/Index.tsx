@@ -10,7 +10,7 @@ interface SkeletonProps {
 
 export function BentoGridDemo() {
   return (
-    <BentoGrid className="w-screen h-sv">
+          <BentoGrid className="w-screen h-sv">
       {items.map((item, i) => (
         <BentoGridItem
           key={i}
@@ -23,6 +23,7 @@ export function BentoGridDemo() {
         />
       ))}
     </BentoGrid>
+
   );
 }
 

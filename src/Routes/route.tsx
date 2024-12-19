@@ -9,6 +9,8 @@ import DeepLearning from './deep-learning';
 import CloudComputing from './cloud-computing';
 import Databases from './dbms';
 import ErrorBoundary from '../Layouts/ErrorBoundary';
+import Subscribe  from './subscribe';
+
 
 const routes = createBrowserRouter([
   {
@@ -48,6 +50,10 @@ const routes = createBrowserRouter([
         path: 'cloud-computing',
         element: <CloudComputing/>,
       },
+      {
+        path: 'subscription',
+        element: <Subscribe/>,
+      }
     ],
   },
 ]);
