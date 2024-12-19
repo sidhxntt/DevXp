@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="sticky top-0 bg-[rgba(0,0,0,0.23)] backdrop-blur-md mb-12 p-4 z-50">
+    <footer className=" bg-[rgba(0,0,0,0.23)] backdrop-blur-md mb-12  z-50">
       <div className="flex items-center justify-end mx-auto max-w-7xl">
         <div className="flex items-center space-x-6">
           <Link
