@@ -33,7 +33,7 @@ const Footer = () => {
           </Link>
           <Link
             className="text-white"
-            to="https://www.instagram.com/siddhant.xo/"
+            to="https://www.instagram.com/sidxntt/"
             target="_blank"
             rel="noopener noreferrer"
           >

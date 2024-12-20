@@ -1,17 +1,19 @@
-// InputBox.tsx
+import { useState, useRef, useCallback, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { cn } from "../../lib/utils";
-import { useRecoilState } from 'recoil';
-import { emailsent } from "../../lib/atoms";
-import { useForm } from "react-hook-form";
-import isEmail from 'is-email';
 
 interface PlaceholdersAndVanishInputProps {
   placeholders: string[];
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmit?: (value: string) => void;
 }
+
+// Utility function to merge classnames
+const cn = (...classes: string[]) => classes.filter(Boolean).join(" ");
+
+// Simple email validation regex
+const isValidEmail = (email: string) => {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+};
 
 export function PlaceholdersAndVanishInput({
   placeholders,
@@ -25,21 +27,16 @@ export function PlaceholdersAndVanishInput({
   const inputRef = useRef<HTMLInputElement>(null);
   const [value, setValue] = useState("");
   const [animating, setAnimating] = useState(false);
-  const [done, setDone] = useRecoilState(emailsent);
+  const [done, setDone] = useState(false);
   const [error, setError] = useState("");
-
-  const {
-    register,
-    formState: { errors }
-  } = useForm();
 
   const validateEmail = useCallback((email: string) => {
     if (!email) {
       setError("Email is required");
       return false;
     }
-    if (!isEmail(email)) {
-      setError("Please enter a valid email address");
+    if (!isValidEmail(email)) {
+      setError("Please enter a valid email address.");
       return false;
     }
     setError("");
@@ -173,7 +170,6 @@ export function PlaceholdersAndVanishInput({
     };
     animateFrame(start);
   };
- 
 
   const handleSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -189,7 +185,7 @@ export function PlaceholdersAndVanishInput({
       const maxX = Math.max(...newDataRef.current.map(p => p.x));
       animate(maxX);
     }
-  }, [animate, animating, draw, onSubmit, setDone, value, validateEmail]);
+  }, [animating, draw, onSubmit, value, validateEmail]);
 
   return (
     <div className="w-full max-w-xl mx-auto">
@@ -208,7 +204,6 @@ export function PlaceholdersAndVanishInput({
           ref={canvasRef}
         />
         <input
-          {...register("input", { required: true })}
           onChange={(e) => {
             if (!animating) {
               setValue(e.target.value);
@@ -224,6 +219,7 @@ export function PlaceholdersAndVanishInput({
           ref={inputRef}
           value={value}
           type="email"
+          required
           placeholder={placeholders[currentPlaceholder]}
           className={cn(
             "w-full relative text-sm sm:text-base z-50 border bg-transparent text-white h-full rounded-full focus:outline-none focus:ring-0 pl-4 sm:pl-10 pr-20",
@@ -235,11 +231,11 @@ export function PlaceholdersAndVanishInput({
           <AnimatePresence mode="wait">
             {!value && (
               <motion.p
-                initial={{ y: 5, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                exit={{ y: -15, opacity: 0 }}
-                transition={{ duration: 0.3, ease: "linear" }}
-                className="dark:text-zinc-500 text-sm sm:text-base font-normal text-neutral-500 pl-4 sm:pl-12 text-left w-[calc(100%-2rem)] truncate"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.15 }}
+                className="dark:text-zinc-500 text-sm sm:text-base font-normal text-neutral-500 pl-4 sm:pl-10 text-left w-[calc(100%-2rem)] truncate"
               >
                 {placeholders[currentPlaceholder]}
               </motion.p>
@@ -254,7 +250,7 @@ export function PlaceholdersAndVanishInput({
       )}
       {done && (
         <div className="mt-2 text-green-500 text-sm pl-4">
-          Email Registered.
+          Email Registered. 🚀
         </div>
       )}
     </div>
