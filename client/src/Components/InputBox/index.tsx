@@ -26,7 +26,8 @@ export function PlaceholdersAndVanishInputDemo() {
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.value);
   }, []);
-
+  
+// api call here
   const handleSubmit = useCallback((value: string) => {
     console.log("submitted:", value);
   }, []);

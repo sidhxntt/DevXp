@@ -1,14 +1,32 @@
 {
-  "name": "temp",
+  "name": "backend",
   "version": "1.0.0",
-  "description": "",
+  "main": "server.ts",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon --exec ts-node server.ts",
+    "lint": "eslint src/**/*.ts --fix",
+    "seed": "ts-node prisma/seed.ts"
+  },
   "dependencies": {
-    "@types/aws-lambda": "^8.10.145",
-    "@types/serverless": "^3.12.22",
-    "aws-lambda": "^1.0.7",
+    "@prisma/client": "5.18.0",
+    "bcrypt": "^5.1.1",
+    "crypto-js": "^4.2.0",
     "express": "^4.19.2",
-    "serverless": "^3.39.0",
-    "serverless-http": "^3.2.0",
-    "serverless-plugin-typescript": "^2.1.5"
+    "ioredis": "^5.4.1",
+    "jsonwebtoken": "^9.0.2",
+    "ts-node": "^10.9.2"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/cors": "^2.8.17",
+    "@types/crypto-js": "^4.2.2",
+    "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "nodemon": "^3.1.4",
+    "prisma": "5.18.0",
+    "typescript": "^5.5.4"
   }
 }
