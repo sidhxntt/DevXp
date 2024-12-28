@@ -1,13 +1,13 @@
-// Demo.tsx
 "use client";
 
 import { PlaceholdersAndVanishInput } from "./InputBox";
 import { useRecoilState } from 'recoil';
-import { emailsent } from "../../lib/atoms";
+import { emailsent, emailnotsent } from "../../lib/atoms";
 import { useEffect, useCallback } from "react";
 
 export function PlaceholdersAndVanishInputDemo() {
   const [done, setDone] = useRecoilState(emailsent);
+  const [_, setServerError] = useRecoilState(emailnotsent);
 
   useEffect(() => {
     if (done) {
@@ -17,24 +17,44 @@ export function PlaceholdersAndVanishInputDemo() {
   }, [done, setDone]);
 
   const placeholders = [
-  "Be a part of our community",
-  "Stay Updated on the Latest Blogs",
-  "Stay Relevant",
-  "Keep Learning & Upskilling",
+    "Be a part of our community",
+    "Stay Updated on the Latest Blogs",
+    "Stay Relevant",
+    "Keep Learning & Upskilling",
   ];
 
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.value);
   }, []);
-  
-// api call here
-  const handleSubmit = useCallback((value: string) => {
-    console.log("submitted:", value);
-  }, []);
+
+  const handleSubmit = useCallback(async (email: string) => {
+    try {
+      const response = await fetch("http://localhost:4000/user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Email Already Registered");
+      }
+
+      const result = await response.json();
+      console.log("Response from server:", result);
+      setDone(true);
+    } catch (error: any) {
+      console.error("Error sending data:", error);
+      setServerError(error.message || "Email Already Registered");
+      throw error; // Re-throw to trigger error handling in child component
+    }
+  }, [setDone, setServerError]);
 
   return (
     <div className="relative top-0 mt-7 h-screen pt-48">
-     <h2 className="mb-10 sm:mb-9 text-xl text-center sm:text-5xl dark:text-white text-white font-">
+      <h2 className="mb-10 sm:mb-9 text-xl text-center sm:text-5xl dark:text-white text-white font-">
         Subscribe to our Newsletter 
       </h2>
       <PlaceholdersAndVanishInput

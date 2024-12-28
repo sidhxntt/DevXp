@@ -1,5 +1,8 @@
+// InputBox.tsx
 import { useState, useRef, useCallback, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useRecoilState } from 'recoil';
+import { emailnotsent } from "../../lib/atoms";
 
 interface PlaceholdersAndVanishInputProps {
   placeholders: string[];
@@ -7,10 +10,8 @@ interface PlaceholdersAndVanishInputProps {
   onSubmit?: (value: string) => void;
 }
 
-// Utility function to merge classnames
 const cn = (...classes: string[]) => classes.filter(Boolean).join(" ");
 
-// Simple email validation regex
 const isValidEmail = (email: string) => {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 };
@@ -27,8 +28,23 @@ export function PlaceholdersAndVanishInput({
   const inputRef = useRef<HTMLInputElement>(null);
   const [value, setValue] = useState("");
   const [animating, setAnimating] = useState(false);
-  const [done, setDone] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
   const [error, setError] = useState("");
+  const [serverError, setServerError] = useRecoilState(emailnotsent);
+
+  useEffect(() => {
+    if (successMessage) {
+      const timer = setTimeout(() => setSuccessMessage(""), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [successMessage]);
+
+  useEffect(() => {
+    if (serverError) {
+      const timer = setTimeout(() => setServerError(""), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [serverError, setServerError]);
 
   const validateEmail = useCallback((email: string) => {
     if (!email) {
@@ -171,7 +187,7 @@ export function PlaceholdersAndVanishInput({
     animateFrame(start);
   };
 
-  const handleSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!animating && value) {
       if (!validateEmail(value)) {
@@ -179,11 +195,17 @@ export function PlaceholdersAndVanishInput({
       }
       setAnimating(true);
       draw();
-      setDone(true);
-      onSubmit?.(value);
       
-      const maxX = Math.max(...newDataRef.current.map(p => p.x));
-      animate(maxX);
+      try {
+        await onSubmit?.(value);
+        setSuccessMessage("Email Registered. 🚀");
+        setValue("");
+      } catch (error) {
+        console.error("Submission error:", error);
+      } finally {
+        const maxX = Math.max(...newDataRef.current.map(p => p.x));
+        animate(maxX);
+      }
     }
   }, [animating, draw, onSubmit, value, validateEmail]);
 
@@ -208,6 +230,8 @@ export function PlaceholdersAndVanishInput({
             if (!animating) {
               setValue(e.target.value);
               setError("");
+              setServerError("");
+              setSuccessMessage("");
               onChange?.(e);
             }
           }}
@@ -224,7 +248,7 @@ export function PlaceholdersAndVanishInput({
           className={cn(
             "w-full relative text-sm sm:text-base z-50 border bg-transparent text-white h-full rounded-full focus:outline-none focus:ring-0 pl-4 sm:pl-10 pr-20",
             animating && "text-transparent dark:text-transparent",
-            error && "border-red-500"
+            (error || serverError) && "border-red-500"
           )}
         />
         <div className="absolute inset-0 flex items-center rounded-full pointer-events-none">
@@ -243,16 +267,23 @@ export function PlaceholdersAndVanishInput({
           </AnimatePresence>
         </div>
       </form>
+      
       {error && (
         <div className="mt-2 text-red-500 text-sm pl-4">
           {error}
         </div>
       )}
-      {done && (
+      {serverError && (
+        <div className="mt-2 text-red-500 text-sm pl-4">
+          {serverError}
+        </div>
+      )}
+      {successMessage && (
         <div className="mt-2 text-green-500 text-sm pl-4">
-          Email Registered. 🚀
+          {successMessage}
         </div>
       )}
     </div>
   );
 }
+
