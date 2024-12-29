@@ -4,7 +4,9 @@
   "main": "server.ts",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon --exec ts-node server.ts"
+    "dev": "prisma generate && nodemon --exec ts-node server.ts",
+    "producer": "prisma generate && pm2 start server.ts --name 'devxp-producer' --interpreter ts-node --env production",
+    "worker": "pm2 start ./utils/worker.ts --name 'devxp-worker' --interpreter ./node_modules/.bin/ts-node --env production"
   },
   "dependencies": {
     "@prisma/client": "^5.18.0",

@@ -86,7 +86,9 @@ const worker = new Worker(
   {
     connection: {
       host: process.env.REDIS_HOST,
-      port: parseInt(process.env.REDIS_PORT || "6379"),
+      port: parseInt(process.env.REDIS_PORT || "13977"),
+      username: process.env.REDIS_USERNAME,
+      password: process.env.REDIS_PASSWORD,
     },
   }
 );

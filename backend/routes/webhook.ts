@@ -3,13 +3,17 @@ import { Queue } from "bullmq";
 import prisma from "../prisma/prisma"; // Ensure prisma is correctly imported
 import formatString from "../utils/formattingstrings";
 const router = express.Router();
+import dotenv from 'dotenv';
+dotenv.config();
 
 
 // Initialize BullMQ queue
 const emailQueue = new Queue("user-emails", {
   connection: {
-    host: "192.168.1.40", // Replace with your Redis host
-    port: 6379,         // Replace with your Redis port
+    host: process.env.REDIS_HOST,
+    port: parseInt(process.env.REDIS_PORT || "13977"), 
+    username: process.env.REDIS_USERNAME,
+    password: process.env.REDIS_PASSWORD,
   },
   defaultJobOptions:{
     attempts: 3,
@@ -34,6 +38,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
         content_type: formatString(content_type),
       });
       console.log(`Queued email event for user: ${user.email}`);
+      // run the job worker here (path of worker file is ../utils/worker.ts )
     }
 
     res.status(200).send("Webhook received and users processed");
