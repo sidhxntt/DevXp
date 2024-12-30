@@ -1,12 +1,12 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "main": "server.ts",
+  "main": "./src/server.ts",
   "license": "MIT",
   "scripts": {
-    "dev": "prisma generate && nodemon --exec ts-node server.ts",
-    "producer": "prisma generate && pm2 start server.ts --name 'devxp-producer' --interpreter ts-node --env production",
-    "worker": "pm2 start ./utils/worker.ts --name 'devxp-worker' --interpreter ./node_modules/.bin/ts-node --env production"
+    "dev": "prisma generate && nodemon --exec ts-node ./src/server.ts",
+    "producer": "prisma generate && pm2 start ./src/server.ts --name 'devxp-producer' --interpreter ts-node --env production",
+    "worker": "pm2 start ./src/utils/worker.ts --name 'devxp-worker' --interpreter ./node_modules/.bin/ts-node --env production"
   },
   "dependencies": {
     "@prisma/client": "^5.18.0",

@@ -1,9 +1,9 @@
 import express, { Request, Response, NextFunction } from "express";
 import { Queue } from "bullmq";
-import prisma from "../prisma/prisma"; // Ensure prisma is correctly imported
-import formatString from "../utils/formattingstrings";
+import prisma from "../../prisma/prisma"; // Ensure prisma is correctly imported
 const router = express.Router();
 import dotenv from 'dotenv';
+import formatString from "../utils/formattingStrings";
 dotenv.config();
 
 

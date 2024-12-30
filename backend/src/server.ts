@@ -1,10 +1,10 @@
 import express, { Express } from "express";
-import allRoutes from "./routes";
 import "dotenv/config";
 import error_handling from "./controllers/error";
 import connectToDatabase from "./db";
 import bodyParser from "body-parser";
 import cors from "cors"; 
+import allRoutes from "./routes/INDEX";
 
 const app: Express = express();
 const port = process.env.PORT_NUMBER;
