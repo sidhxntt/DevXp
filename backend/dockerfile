@@ -1,25 +1,14 @@
-FROM node:18 AS base
+FROM node:18 
 
 WORKDIR /app
-
-COPY package*.json ./
-
-RUN npm install
-
-FROM node:18 AS runner
-
-WORKDIR /app
-
-COPY --from=base /app/node_modules ./node_modules
 
 COPY . .
+RUN npm install
 
 RUN npm install 
-# RUN npm install -g pm2
-# RUN pm2 update
-# RUN  pm2 save
+RUN npm install -g pm2 
 
 EXPOSE 4000
 
-CMD ["npm", "run", "dev"]  
-# pm2-runtime for docker and pm2 for normal process
+CMD ["npm", "run", "start:pm2" ]
+# pm2-runtime for docker normal pm2 for local
