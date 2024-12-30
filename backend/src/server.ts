@@ -9,13 +9,12 @@ import allRoutes from "./routes/INDEX";
 const app: Express = express();
 const port = process.env.PORT_NUMBER;
 const server = process.env.SERVER
-const client = process.env.CLIENT_SERVER
 
 app.use(express.json());
 app.use(bodyParser.json());
 
 const corsOptions = {
-  origin: client, 
+  origin: "*", 
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
 };

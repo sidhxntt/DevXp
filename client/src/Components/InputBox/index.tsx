@@ -29,7 +29,7 @@ export function PlaceholdersAndVanishInputDemo() {
 
   const handleSubmit = useCallback(async (email: string) => {
     try {
-      const response = await fetch("http://localhost:4000/user", {
+      const response = await fetch(import.meta.env.VITE_API_ENDPOINT!, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
