@@ -17,7 +17,7 @@
 - Express - ts node(nodemon)
 - supabase with prisma ORM
 - BullMQ for queue for server offloading (redis cloud)
-- Nodemailer for emails
+- Nodemailer for emails and aws s3 for pic sotrage for nodemailer
 - docker for containerisation
 - pm2 to run producer and worker as different processes in same server 
 - contentful webhook with ngrok
