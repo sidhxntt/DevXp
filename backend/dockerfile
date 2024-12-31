@@ -12,4 +12,3 @@ RUN npm run build
 EXPOSE 4000
 
 CMD ["npm", "run", "start:pm2" ]
-# pm2-runtime for docker normal pm2 for local
