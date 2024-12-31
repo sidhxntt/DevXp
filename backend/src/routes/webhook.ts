@@ -6,8 +6,6 @@ import formatString from "../utils/formattingStrings";
 import prisma from "../utils/prisma";
 dotenv.config();
 
-
-// Initialize BullMQ queue
 const emailQueue = new Queue("user-emails", {
   connection: {
     host: process.env.REDIS_HOST,
@@ -28,7 +26,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
 
     const blog_name = req.body.fields.title['en-US'];
     const content_type = req.body.sys.contentType.sys.id;
-    // Add each user's data to the BullMQ queue
+
     for (const user of users) {
       await emailQueue.add("send-email", {
         userId: user.id,
@@ -38,7 +36,6 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
         content_type: formatString(content_type),
       });
       console.log(`Queued email event for user: ${user.email}`);
-      // run the job worker here (path of worker file is ../utils/worker.ts )
     }
 
     res.status(200).send("Webhook received and users processed");
