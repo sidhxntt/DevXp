@@ -1,11 +1,8 @@
 import { Worker } from "bullmq";
 import nodemailer from "nodemailer";
 import dotenv from 'dotenv';
-
-// Load environment variables
 dotenv.config();
 
-// Configure Nodemailer transporter for Gmail
 const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST || "smtp.gmail.com",
     port: parseInt(process.env.SMTP_PORT || "465"),
@@ -16,7 +13,6 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-// Define the worker
 const worker = new Worker(
   "user-emails",
   async (job) => {
@@ -24,7 +20,6 @@ const worker = new Worker(
 
     console.log(`Processing email for user ID: ${userId}`);
 
-    // Sending email using Nodemailer
     try {
       const info = await transporter.sendMail({
         from: `"${process.env.EMAIL_FROM_NAME}" <${process.env.SMTP_USER}>`,
@@ -93,7 +88,6 @@ const worker = new Worker(
   }
 );
 
-// Error handling
 worker.on("error", (error) => {
   console.error("Worker encountered an error:", error);
 });
