@@ -9,9 +9,7 @@ const renderOptions = {
       const { title, file } = node.data.target.fields;
       const { url, contentType, details } = file;
 
-      // Check if the asset is an image or video based on the contentType
       if (contentType.startsWith("image/")) {
-        // Handle image
         const { width, height } = details.image;
         return (
           <div>
@@ -24,12 +22,10 @@ const renderOptions = {
           </div>
         );
       } else if (contentType.startsWith("video/")) {
-        // Handle video as iframe
         const videoUrl = `https:${url}`;
         return (
           <div className="relative pb-16/9">
             {" "}
-            {/* Aspect ratio 16:9 */}
             <iframe
               src={videoUrl}
               title={title || "Contentful Video"}
@@ -60,7 +56,6 @@ const renderOptions = {
 
   renderMark: {
     [MARKS.CODE]: (text: React.ReactNode) => {
-      // Convert the ReactNode to string if it's not already a string
       const codeText = typeof text === "string" ? text : String(text);
 
       return (
