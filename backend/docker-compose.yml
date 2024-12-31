@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: dockerfile
     ports:
-      - "4000:4000"  # Map container port 3000 to host port 3000
+      - "4000:4000"
     networks:
       - app-network
 
