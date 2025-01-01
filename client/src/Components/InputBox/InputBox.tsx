@@ -1,7 +1,7 @@
 // InputBox.tsx
 import { useState, useRef, useCallback, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { useRecoilState } from 'recoil';
+import { useRecoilState } from "recoil";
 import { emailnotsent } from "../../lib/atoms";
 
 interface PlaceholdersAndVanishInputProps {
@@ -24,7 +24,9 @@ export function PlaceholdersAndVanishInput({
   const [currentPlaceholder, setCurrentPlaceholder] = useState(0);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const newDataRef = useRef<Array<{x: number; y: number; r: number; color: string}>>([]);
+  const newDataRef = useRef<
+    Array<{ x: number; y: number; r: number; color: string }>
+  >([]);
   const inputRef = useRef<HTMLInputElement>(null);
   const [value, setValue] = useState("");
   const [animating, setAnimating] = useState(false);
@@ -92,21 +94,21 @@ export function PlaceholdersAndVanishInput({
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
- 
+
     canvas.width = 800;
     canvas.height = 800;
     ctx.clearRect(0, 0, 800, 800);
     const computedStyles = getComputedStyle(inputRef.current);
- 
+
     const fontSize = parseFloat(computedStyles.getPropertyValue("font-size"));
     ctx.font = `${fontSize * 2}px ${computedStyles.fontFamily}`;
     ctx.fillStyle = "#FFF";
     ctx.fillText(value, 16, 40);
- 
+
     const imageData = ctx.getImageData(0, 0, 800, 800);
     const pixelData = imageData.data;
     const newData: any[] = [];
- 
+
     for (let t = 0; t < 800; t++) {
       let i = 4 * t * 800;
       for (let n = 0; n < 800; n++) {
@@ -129,7 +131,7 @@ export function PlaceholdersAndVanishInput({
         }
       }
     }
- 
+
     newDataRef.current = newData.map(({ x, y, color }) => ({
       x,
       y,
@@ -137,11 +139,11 @@ export function PlaceholdersAndVanishInput({
       color: `rgba(${color[0]}, ${color[1]}, ${color[2]}, ${color[3]})`,
     }));
   }, [value]);
- 
+
   useEffect(() => {
     draw();
   }, [value, draw]);
- 
+
   const animate = (start: number) => {
     const animateFrame = (pos: number = 0) => {
       requestAnimationFrame(() => {
@@ -187,27 +189,30 @@ export function PlaceholdersAndVanishInput({
     animateFrame(start);
   };
 
-  const handleSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!animating && value) {
-      if (!validateEmail(value)) {
-        return;
+  const handleSubmit = useCallback(
+    async (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      if (!animating && value) {
+        if (!validateEmail(value)) {
+          return;
+        }
+        setAnimating(true);
+        draw();
+
+        try {
+          await onSubmit?.(value);
+          setSuccessMessage("Email Registered. 🚀");
+          setValue("");
+        } catch (error) {
+          console.error("Submission error:", error);
+        } finally {
+          const maxX = Math.max(...newDataRef.current.map((p) => p.x));
+          animate(maxX);
+        }
       }
-      setAnimating(true);
-      draw();
-      
-      try {
-        await onSubmit?.(value);
-        setSuccessMessage("Email Registered. 🚀");
-        setValue("");
-      } catch (error) {
-        console.error("Submission error:", error);
-      } finally {
-        const maxX = Math.max(...newDataRef.current.map(p => p.x));
-        animate(maxX);
-      }
-    }
-  }, [animating, draw, onSubmit, value, validateEmail]);
+    },
+    [animating, draw, onSubmit, value, validateEmail]
+  );
 
   return (
     <div className="w-full max-w-xl mx-auto">
@@ -251,6 +256,43 @@ export function PlaceholdersAndVanishInput({
             (error || serverError) && "border-red-500"
           )}
         />
+        <button
+          type="submit"
+          onSubmit={()=>handleSubmit}
+          className="absolute right-2 top-1/2 z-50 -translate-y-1/2 h-8 w-8 rounded-full disabled:bg-gray-100 bg-black dark:bg-zinc-900 dark:disabled:bg-zinc-800 transition duration-200 flex items-center justify-center"
+        >
+          <motion.svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="text-gray-300 h-4 w-4"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <motion.path
+              d="M5 12l14 0"
+              initial={{
+                strokeDasharray: "50%",
+                strokeDashoffset: "50%",
+              }}
+              animate={{
+                strokeDashoffset: value ? 0 : "50%",
+              }}
+              transition={{
+                duration: 0.3,
+                ease: "linear",
+              }}
+            />
+            <path d="M13 18l6 -6" />
+            <path d="M13 6l6 6" />
+          </motion.svg>
+        </button>
+
         <div className="absolute inset-0 flex items-center rounded-full pointer-events-none">
           <AnimatePresence mode="wait">
             {!value && (
@@ -267,23 +309,14 @@ export function PlaceholdersAndVanishInput({
           </AnimatePresence>
         </div>
       </form>
-      
-      {error && (
-        <div className="mt-2 text-red-500 text-sm pl-4">
-          {error}
-        </div>
-      )}
+
+      {error && <div className="mt-2 text-red-500 text-sm pl-4">{error}</div>}
       {serverError && (
-        <div className="mt-2 text-red-500 text-sm pl-4">
-          {serverError}
-        </div>
+        <div className="mt-2 text-red-500 text-sm pl-4">{serverError}</div>
       )}
       {successMessage && (
-        <div className="mt-2 text-green-500 text-sm pl-4">
-          {successMessage}
-        </div>
+        <div className="mt-2 text-green-500 text-sm pl-4">{successMessage}</div>
       )}
     </div>
   );
 }
-

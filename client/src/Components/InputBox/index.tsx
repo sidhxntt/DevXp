@@ -17,6 +17,7 @@ export function PlaceholdersAndVanishInputDemo() {
   }, [done, setDone]);
 
   const placeholders = [
+    "Enter your Email",
     "Be a part of our community",
     "Stay Updated on the Latest Blogs",
     "Stay Relevant",
