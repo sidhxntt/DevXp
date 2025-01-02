@@ -54,7 +54,7 @@ export function PlaceholdersAndVanishInputDemo() {
   }, [setDone, setServerError]);
 
   return (
-    <div className="relative top-0 mt-7 h-screen pt-48">
+    <div className="pt-48">
       <h2 className="mb-10 sm:mb-9 text-xl text-center sm:text-5xl dark:text-white text-white font-">
         Subscribe to our Newsletter 
       </h2>

@@ -1,7 +1,6 @@
-import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { FaLink } from "react-icons/fa6";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -11,6 +10,7 @@ const Navbar = () => {
         <Link className="absolute left-14 mt-2 cursor-pointer" to="/">
           <img src="/Logo.png" alt="Logo" width={100} height={100} />
         </Link>
+        <div className="flex items-center space-x-6">
         <button
           onClick={() => {
             navigate("/subscription");
@@ -40,6 +40,15 @@ const Navbar = () => {
           </div>
           <span className="absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-purple-400/0 via-purple-400/90 to-purple-400/0 transition-opacity duration-500 group-hover:opacity-40" />
         </button>
+        <Link
+            className="text-white"
+            to="https://shimmering-crepe-02d6ce.netlify.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaLink />
+          </Link>
+        </div>
       </div>
     </header>
   );
