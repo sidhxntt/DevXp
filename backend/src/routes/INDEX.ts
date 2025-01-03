@@ -6,8 +6,8 @@ import testing from "./testing";
 
 const allRoutes = (app: Application) => {
   app.use("/", home);
-  // app.use("/user", user);
-  // app.use("/contentful/webhook", webhook);
+  app.use("/user", user);
+  app.use("/contentful/webhook", webhook);
   app.use("/testing", testing);
 };
 

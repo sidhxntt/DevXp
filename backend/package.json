@@ -4,7 +4,7 @@
   "main": "./src/server.ts",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon --exec ts-node ./src/server.ts",
+    "dev": "prisma generate && nodemon --exec ts-node ./src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
     "start:pm2": "prisma generate && pm2-runtime start ecosystem.config.js"
