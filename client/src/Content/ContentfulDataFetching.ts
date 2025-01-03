@@ -7,6 +7,7 @@ interface MappedEntry {
   src: string ;  
   content: Document;
 }
+
 const mapEntries = (items: any[]): MappedEntry[] => {
   return items.map((item) => {
     const fields = item.fields;

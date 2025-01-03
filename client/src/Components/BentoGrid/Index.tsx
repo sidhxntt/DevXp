@@ -3,12 +3,21 @@ import { SiTypescript, SiAnaconda, SiTensorflow } from "react-icons/si";
 import { FaReact, FaCloud } from "react-icons/fa";
 import { FaDatabase } from "react-icons/fa6";
 import { DiLinux } from "react-icons/di";
+import useFetch from "../../hooks/useFetch";
+import { useEffect } from "react";
 
 interface SkeletonProps {
   image: string;
 }
 
 export function BentoGridDemo() {
+  const {token, data, loading, error} = useFetch("http://localhost:4000/testing")
+
+  useEffect(() => {
+    console.log("Token: ", token)
+    console.log("Data: ", data)
+  }
+  , [token])
   return (
           <BentoGrid className="w-screen h-sv">
       {items.map((item, i) => (

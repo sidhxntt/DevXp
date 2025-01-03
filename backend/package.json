@@ -4,22 +4,26 @@
   "main": "./src/server.ts",
   "license": "MIT",
   "scripts": {
-    "dev": "prisma generate && nodemon --exec ts-node ./src/server.ts",
+    "dev": "nodemon --exec ts-node ./src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
     "start:pm2": "prisma generate && pm2-runtime start ecosystem.config.js"
   },
   "dependencies": {
+    "@clerk/clerk-sdk-node": "^5.1.4",
+    "@clerk/express": "^1.3.31",
     "@prisma/client": "^5.18.0",
     "body-parser": "^1.20.3",
     "bullmq": "^5.34.5",
     "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
     "nodemailer": "^6.9.16",
     "ts-node": "^10.9.2"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.7",
     "@types/nodemailer": "^6.4.17",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
