@@ -5,7 +5,9 @@ import { useOutsideClick } from "../../hooks/use-outside-click";
 import { IconX } from "@tabler/icons-react";
 import { CiTimer } from "react-icons/ci";
 import { Document } from "@contentful/rich-text-types";
-
+import { useRecoilState } from "recoil";
+import { tokenAquired } from "../../lib/atoms";
+import { useAuth } from "@clerk/clerk-react";
 import React, {
   useEffect,
   useRef,
@@ -14,6 +16,8 @@ import React, {
   useContext,
 } from "react";
 import renderOptions from "../../Content/documentToReactComponents(options)";
+import { FaRegStar } from "react-icons/fa";
+import axios from "axios";
 
 interface CarouselProps {
   items: JSX.Element[];
@@ -40,12 +44,22 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
   const [, setCanScrollLeft] = React.useState(false);
   const [, setCanScrollRight] = React.useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [_, setIstoken] = useRecoilState(tokenAquired);
+  const { getToken } = useAuth();
 
   useEffect(() => {
-    if (carouselRef.current) {
-      carouselRef.current.scrollLeft = initialScroll;
-      checkScrollability();
-    }
+    const init = async () => {
+      if (carouselRef.current) {
+        carouselRef.current.scrollLeft = initialScroll;
+        checkScrollability();
+      }
+      const template = "DevXPUserInfo";
+      const token = await getToken({ template });
+      if (token) {
+        setIstoken(true);
+      }
+    };
+    init();
   }, [initialScroll]);
 
   const checkScrollability = () => {
@@ -124,6 +138,7 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
   );
 };
 
+// CHANGES
 export const Card = ({
   card,
   index,
@@ -135,7 +150,9 @@ export const Card = ({
 }) => {
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const { onCardClose, } = useContext(CarouselContext);
+  const { onCardClose } = useContext(CarouselContext);
+  const [isToken] = useRecoilState(tokenAquired);
+  const { getToken } = useAuth();
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
@@ -152,11 +169,12 @@ export const Card = ({
 
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, );
+  }, [open]);
 
   useOutsideClick(containerRef, () => handleClose());
 
   const handleOpen = () => {
+    // console.log(card.title);
     setOpen(true);
   };
 
@@ -164,6 +182,30 @@ export const Card = ({
     setOpen(false);
     onCardClose(index);
   };
+
+  const handleClick = async() => {
+    const data = { title: card.title };
+    const template = "DevXPUserInfo";
+    const token = await getToken({ template });
+    console.log(data)
+    await axios
+    .post(
+      "http://localhost:4000/testing/fav", 
+      data, 
+      { 
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        }
+      }
+    )
+    .then(function (response) {
+      console.log("Data sent to the server:", response.data); 
+    })
+    .catch(function (error) {
+      console.error("Error sending data to the server:", error); 
+    });
+  }
 
   return (
     <>
@@ -199,15 +241,22 @@ export const Card = ({
                   {card.reading_time}
                 </div>
               </motion.p>
-              <motion.p
+              <div className="flex gap-2">
+                 <motion.p
                 layoutId={layout ? `title-${card.title}` : undefined}
-                className="text-2xl md:text-5xl font-semibold  mt-4 text-white"
+                className="text-2xl md:text-5xl font-semibold mt-4 text-white"
               >
                 {card.title}
               </motion.p>
-
-              <div className="relative py-10 px-6 prose prose-a:text-blue-400  left-1/2 transform -translate-x-1/2">
-                   {documentToReactComponents(card.content, renderOptions)}
+              {isToken && (
+                <button onClick={handleClick}>
+                  <FaRegStar color="white" />
+                </button>
+              )}
+              </div>
+             
+              <div className="relative py-10 px-6 prose prose-a:text-blue-400 left-1/2 transform -translate-x-1/2">
+                {documentToReactComponents(card.content, renderOptions)}
               </div>
             </motion.div>
           </div>
@@ -246,6 +295,7 @@ export const Card = ({
   );
 };
 
+
 export const BlurImage = ({
   height,
   width,
@@ -261,10 +311,7 @@ export const BlurImage = ({
 }) => {
   return (
     <div
-      className={cn(
-        "relative bg-gray-800 z-10 w-full",
-        className
-      )}
+      className={cn("relative bg-gray-800 z-10 w-full", className)}
       style={{
         height: height ?? "auto",
         width: width ?? "100%",

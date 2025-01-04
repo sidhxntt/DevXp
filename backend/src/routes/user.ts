@@ -4,7 +4,7 @@ import prisma from "../utils/prisma";
 const router = express.Router();
 
 router.post("/", async(req: Request, res:Response, next: NextFunction)=>{
-    post_user(req, res, next, prisma.user)
+    post_user(req, res, next, prisma.subscribing_User)
   })
 
 router.get("/", async(req: Request, res:Response, next: NextFunction)=>{

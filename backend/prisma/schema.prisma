@@ -4,47 +4,46 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url       = env("DATABASE_URL")
+  url      = env("DATABASE_URL")
 }
 
 model Subscribing_User {
-  id           Int      @id @default(autoincrement())
-  email        String   @unique
+  id           Int       @id @default(autoincrement())
+  email        String    @unique
   name         String?
   subscribedAt DateTime?
 }
 
 model User {
-  id            Int       @id @default(autoincrement())
-  Clerk_User_Id String    @unique
-  email         String    @unique
+  id            Int      @id @default(autoincrement())
+  Clerk_User_Id String   @unique
+  email         String   @unique
   name          String?
   phone_number  String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 
   // This is the relation field to track favorites
-  favorites     Favorite[] // A user can have many favorite blogs
+  favorites Favorite[] // A user can have many favorite blogs
 }
 
 model Blogs {
-  id           Int        @id @default(autoincrement())
-  title        String
-  contenttype  String
-  reading_time Int?       // Assuming you want to store reading time as an integer (in minutes)
-  isFavorite   Boolean    @default(false)
-  createdAt    DateTime   @default(now())
-  
+  id          Int      @id @default(autoincrement())
+  title       String   @unique
+  contentType String
+  readingTime String // Assuming you want to store reading time as an integer (in minutes)
+  createdAt   DateTime @default(now())
+
   // This is the relation field to track which users have favorited this blog
-  favorites    Favorite[] // A blog can have many users who favorited it
+  favorites Favorite[] // A blog can have many users who favorited it
 }
 
 model Favorite {
-  id       Int    @id @default(autoincrement())
-  User     User   @relation(fields: [userId], references: [id])
-  userId   Int
-  Blog     Blogs  @relation(fields: [blogId], references: [id])
-  blogId   Int
+  id     Int   @id @default(autoincrement())
+  User   User  @relation(fields: [userId], references: [id])
+  userId Int
+  Blog   Blogs @relation(fields: [blogId], references: [id])
+  blogId Int
 
   // Ensures that a user cannot favorite the same blog more than once
   @@unique([userId, blogId])

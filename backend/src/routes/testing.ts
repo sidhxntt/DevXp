@@ -43,7 +43,7 @@ router.get(
 
       if (userExists) {
         console.log("User Exists:", userExists);
-        return res.status(200).send("User already exists");
+        return res.status(400).send("User already exists");
       }
 
       const newUser = await prisma.user.create({
@@ -71,18 +71,51 @@ router.get(
 );
 
 router.post("/contentful", async (req: Request, res: Response, next: NextFunction) => {
-  try { 
+  try {
     const data = req.body;
-    console.log(data)
-    data.map((item: any) => {
-      console.log(item.fields.title);
-      console.log(item.sys.contentType.sys.id)
-    });
-    res.status(200).json({ message: "Data received successfully", data: req.body });
+
+    if (!Array.isArray(data)) {
+      return res.status(400).json({ message: "Invalid data format. Expected an array." });
+    }
+
+    for (const item of data) {
+      const title = item.fields.title;
+      const readingTime = item.fields.readingTime;
+      const contentType = item.sys.contentType.sys.id;
+
+      const done = await prisma.blogs.upsert({
+        where: { title }, 
+        update: { contentType }, 
+        create: { title, contentType, readingTime }, 
+      });
+    }
+    res.status(200).json({ message: "Data processed successfully", data });
   } catch (error) {
-    next(error);  
+    next(error);
   }
 });
+
+router.post("/fav", requireAuth(), async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+  try {
+    const { userId } = req.auth!;
+    const user = await clerkClient.users.getUser(userId);
+    const {id} = user;
+    const data = req.body;
+
+    const ExistingUser = await prisma.user.findUnique({
+      where: { Clerk_User_Id: id },
+    });
+
+    if (!ExistingUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    console.log({"User ID": ExistingUser.Clerk_User_Id, "Data": data.title});
+    res.status(200);
+  } catch (error) {
+    next(error);
+  }
+});
+
 
 
 export default router;

@@ -34,23 +34,23 @@ const fetchContentfulData = async (
     }
     const res: any = await client.getEntries({ content_type: contentType });
     const data = res.items;
-    await axios
-      .post(
-        "http://localhost:4000/testing/contentful", 
-        data, 
-        { 
-          headers: {
-            "Content-Type": "application/json",
-          }
-        }
-      )
-      .then(function (response) {
-        console.log("Data sent to the server:", response.data); 
-      })
-      .catch(function (error) {
-        console.error("Error sending data to the server:", error); 
-      });
-    return mapEntries(res.items);
+    // await axios
+    //   .post(
+    //     "http://localhost:4000/testing/contentful", 
+    //     data, 
+    //     { 
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       }
+    //     }
+    //   )
+    //   .then(function (response) {
+    //     console.log("Data sent to the server:", response.data); 
+    //   })
+    //   .catch(function (error) {
+    //     console.error("Error sending data to the server:", error); 
+    //   });
+    return mapEntries(data);
   } catch (error) {
     console.error(`Error fetching ${contentType} data from Contentful:`, error);
   }

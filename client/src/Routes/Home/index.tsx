@@ -1,8 +1,11 @@
-import { BentoGridDemo } from "../../Components/BentoGrid/Index"
+import { BentoGridDemo } from "../../Components/BentoGrid/Index";
 
 const Home = () => {
   return (
-    <BentoGridDemo />  
+    <>
+        <BentoGridDemo />
+    </>
+ 
   );
 };
 

@@ -25,9 +25,8 @@ CREATE TABLE "User" (
 CREATE TABLE "Blogs" (
     "id" SERIAL NOT NULL,
     "title" TEXT NOT NULL,
-    "contenttype" TEXT NOT NULL,
-    "reading_time" INTEGER,
-    "isFavorite" BOOLEAN NOT NULL DEFAULT false,
+    "contentType" TEXT NOT NULL,
+    "readingTime" INTEGER,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Blogs_pkey" PRIMARY KEY ("id")

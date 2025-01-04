@@ -9,3 +9,8 @@ export const emailnotsent = atom({
   key: 'emailnotsent',
   default: false,
 });
+
+export const tokenAquired = atom({
+  key: 'tokenAquired',
+  default: false,
+})

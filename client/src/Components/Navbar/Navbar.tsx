@@ -1,68 +1,173 @@
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { FaLink } from "react-icons/fa6";
+import { useAuth } from "@clerk/clerk-react";
 import {
   SignedIn,
   SignedOut,
   SignInButton,
   UserButton,
 } from "@clerk/clerk-react";
+import { useEffect, useState } from "react";
+
+const DisplayPic = () => (
+  <header className="text-white">
+    <SignedOut>
+      <SignInButton />
+    </SignedOut>
+    <SignedIn>
+      <UserButton />
+    </SignedIn>
+  </header>
+);
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const { getToken } = useAuth();
+  const [display, setDisplay] = useState<boolean>(false);
+
+  useEffect(() => {
+    const fetchToken = async () => {
+      try {
+        const template = "DevXPUserInfo";
+        const token = await getToken({ template });
+        if (token) {
+          setDisplay(true);
+        }
+      } catch (error) {
+        console.error("Failed to fetch token:", error);
+      }
+    };
+
+    fetchToken();
+  }, [getToken]);
+
+  const toggleMobileMenu = () => {
+    const mobileMenu = document.getElementById("mobile-menu");
+    mobileMenu?.classList.toggle("hidden");
+  };
+
   return (
-    <header className="sticky top-0 bg-[rgba(0,0,0,0.23)] backdrop-blur-md mb-12 p-4 z-50">
-      <div className="flex items-center justify-end p-4 mx-auto max-w-7xl">
-        <Link className="absolute left-14 mt-2 cursor-pointer" to="/">
-          <img src="/Logo.png" alt="Logo" width={100} height={100} />
+    <header className="sticky top-0 bg-[rgba(0,0,0,0.23)] backdrop-blur-md p-6 z-50 text-white">
+      <div className="flex items-center justify-between mx-auto max-w-7xl">
+        {/* Logo */}
+        <Link to="/" className="flex items-center">
+          <div className="h-20 w-20">
+            <img
+              className="object-fill scale-150"
+              src="/Logo.png"
+              alt="logo"
+            />
+          </div>
         </Link>
-        <div className="flex items-center space-x-6">
-          <button
-            onClick={() => {
-              navigate("/subscription");
-            }}
-            className="bg-transparent no-underline group cursor-pointer relative shadow-2xl shadow-zinc-900 rounded-full p-px text-xs font-semibold leading-6 text-white inline-block"
-          >
-            <span className="absolute inset-0 overflow-hidden rounded-full">
-              <span className="absolute inset-0 rounded-full bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(138,43,226,0.6)_0%,rgba(138,43,226,0)_75%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-            </span>
-            <div className="relative flex space-x-2 items-center z-10 rounded-full bg-transparent py-0.5 px-4 ring-1 ring-white/10 ">
-              <span>Subscribe</span>
-              <svg
-                fill="none"
-                height="16"
-                viewBox="0 0 24 24"
-                width="16"
-                xmlns="http://www.w3.org/2000/svg"
+
+        <div className="flex items-center space-x-4">
+          {/* Desktop Navigation Links */}
+          <nav className="hidden md:flex space-x-4">
+            <Link
+              to="https://handler.devxp.in/"
+              target="_blank"
+              className="text-sm font-medium hover:underline"
+            >
+              Connect with me
+            </Link>
+            {display && (
+              <Link
+                to="https://handler.devxp.in/"
+                target="_blank"
+                className="text-sm font-medium hover:underline"
               >
-                <path
-                  d="M10.75 8.75L14.25 12L10.75 15.25"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="1.5"
-                />
-              </svg>
-            </div>
-            <span className="absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-purple-400/0 via-purple-400/90 to-purple-400/0 transition-opacity duration-500 group-hover:opacity-40" />
+                Your Favourites
+              </Link>
+            )}
+          </nav>
+
+          {/* User Section */}
+          <DisplayPic />
+
+          {/* Subscribe Button */}
+          <button
+            onClick={() => navigate("/subscription")}
+            className="hidden md:inline-block px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700"
+          >
+            Subscribe
+          </button>
+
+          {/* Mobile Navigation Toggle */}
+          <button
+            className="md:hidden flex items-center px-2"
+            onClick={toggleMobileMenu}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-6 h-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h16m-7 6h7"
+              />
+            </svg>
+          </button>
+        </div>
+
+        {/* Mobile Menu */}
+        <div
+          id="mobile-menu"
+          className="hidden absolute top-16 left-0 right-0 bg-white shadow-md rounded-lg p-4 space-y-4 md:hidden"
+        >
+          <button
+            className="self-end flex items-center px-2 text-gray-600"
+            onClick={toggleMobileMenu}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-6 h-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
           </button>
           <Link
-            className="text-white"
-            to="https://handler.devxp.in/"
-            target="_blank"
-            rel="noopener noreferrer"
+            to="/features"
+            className="block text-sm font-medium text-gray-800 hover:underline"
           >
-            <FaLink />
+            Features
           </Link>
-          <header className="text-white">
-      <SignedOut>
-        <SignInButton />
-      </SignedOut>
-      <SignedIn>
-        <UserButton />
-      </SignedIn>
-    </header>
-          
+          <Link
+            to="/pricing"
+            className="block text-sm font-medium text-gray-800 hover:underline"
+          >
+            Pricing
+          </Link>
+          <Link
+            to="/blog"
+            className="block text-sm font-medium text-gray-800 hover:underline"
+          >
+            Blog
+          </Link>
+          <Link
+            to="/company"
+            className="block text-sm font-medium text-gray-800 hover:underline"
+          >
+            Company
+          </Link>
+          <button
+            onClick={() => navigate("/get-started")}
+            className="block w-full text-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700"
+          >
+            Get Started
+          </button>
         </div>
       </div>
     </header>

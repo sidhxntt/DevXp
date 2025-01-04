@@ -1,41 +1,41 @@
-import express, { Express } from "express";
+import express, { Express, Request, Response, NextFunction } from "express";
 import "dotenv/config";
-import error_handling from "./controllers/error";
 import connectToDatabase from "./db";
-import bodyParser from "body-parser";
-import cors from "cors"; 
+import errorHandling from "./controllers/error";
+import cors from "cors";
 import allRoutes from "./routes/INDEX";
 
 const app: Express = express();
-const port = process.env.PORT_NUMBER;
-const server = process.env.SERVER
 
-app.use(express.json({ limit: '50mb' }));
-app.use(bodyParser.json());
+const port = process.env.PORT_NUMBER || 4000; 
+const server = process.env.SERVER || "http://localhost";
 
-app.use(cors({
-  origin: 'http://localhost:5173', 
-  methods: ['GET', 'POST'], 
-  allowedHeaders: ['Content-Type', 'Authorization'], 
-}));
+app.use(express.json({ limit: "50mb" })); 
+app.use(
+  cors({
+    origin: "http://localhost:5173", 
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
+allRoutes(app);
 
-const StartServer = async(): Promise<void> => {
+app.use(errorHandling);
+
+const startServer = async (): Promise<void> => {
   try {
-    await connectToDatabase()
+    await connectToDatabase(); 
     app.listen(port, () => {
-      console.log(`Example app is now listening at: ${server}🐳`);
+      console.log(`Server is running at ${server} 🚀`);
     });
   } catch (error: unknown) {
     if (error instanceof Error) {
-      console.log(error.message);
+      console.error("Error starting the server:", error.message);
     } else {
-      console.log("An unknown error occurred");
+      console.error("An unknown error occurred while starting the server");
     }
   }
 };
 
-allRoutes(app);
-app.use(error_handling);
-
-StartServer();
+startServer();
