@@ -2,12 +2,14 @@
 import { useEffect, useState } from "react";
 import { useAuth } from '@clerk/clerk-react';
 import axios from 'axios';
+import { useRecoilState } from 'recoil';
+import { tokenAquired } from "../lib/atoms";
 
 const useFetch = <T,>(url: string) => {
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | null>(null);
-  const [token, setToken] = useState<string | null>("")
+  const [token, setToken] = useRecoilState(tokenAquired)
   const { getToken } = useAuth();
 
   useEffect(() => {

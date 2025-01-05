@@ -1,4 +1,4 @@
-import fetchContentfulData from '../ContentfulDataFetching';
+import {fetchContentfulData} from '../ContentfulDataFetching';
 
 const get_FrontendEssentials_data = () => fetchContentfulData('frontendEssentials');
 

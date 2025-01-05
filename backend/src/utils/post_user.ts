@@ -1,9 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import getEmailPrefix from "./domain_removal";
-
-interface UserInput {
-  email: string;
-}
+import {UserInput} from "../types/Alltypes"
 
 async function post_user(req: Request, res: Response, next: NextFunction, model: any) {
   try {

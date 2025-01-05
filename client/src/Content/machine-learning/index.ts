@@ -1,4 +1,4 @@
-import fetchContentfulData from '../ContentfulDataFetching';
+import {fetchContentfulData} from '../ContentfulDataFetching';
 
 const get_dataPreprocessing_data = () => fetchContentfulData('dataPreprocessing');
 const get_Supervised_algorithms_data = () => fetchContentfulData('supervisedAlgorithms');

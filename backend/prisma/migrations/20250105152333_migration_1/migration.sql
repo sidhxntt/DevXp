@@ -26,7 +26,7 @@ CREATE TABLE "Blogs" (
     "id" SERIAL NOT NULL,
     "title" TEXT NOT NULL,
     "contentType" TEXT NOT NULL,
-    "readingTime" INTEGER,
+    "readingTime" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Blogs_pkey" PRIMARY KEY ("id")
@@ -37,6 +37,7 @@ CREATE TABLE "Favorite" (
     "id" SERIAL NOT NULL,
     "userId" INTEGER NOT NULL,
     "blogId" INTEGER NOT NULL,
+    "favoredAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Favorite_pkey" PRIMARY KEY ("id")
 );
@@ -49,6 +50,9 @@ CREATE UNIQUE INDEX "User_Clerk_User_Id_key" ON "User"("Clerk_User_Id");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Blogs_title_key" ON "Blogs"("title");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Favorite_userId_blogId_key" ON "Favorite"("userId", "blogId");

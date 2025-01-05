@@ -1,4 +1,4 @@
-import fetchContentfulData from "../ContentfulDataFetching";
+import {fetchContentfulData} from "../ContentfulDataFetching";
 
 const get_ComputerNetworks_data = () => fetchContentfulData("computerNetworks");
 const get_BackendEssentials_data = () => fetchContentfulData("backendEssentials");

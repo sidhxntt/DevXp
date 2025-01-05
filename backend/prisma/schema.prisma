@@ -23,28 +23,30 @@ model User {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
-  // This is the relation field to track favorites
-  favorites Favorite[] // A user can have many favorite blogs
+  // Relation to the Favorite model to track a user's favorites
+  favorites     Favorite[] // A user can have many favorites
 }
 
 model Blogs {
   id          Int      @id @default(autoincrement())
   title       String   @unique
   contentType String
-  readingTime String // Assuming you want to store reading time as an integer (in minutes)
+  readingTime String   // Can store as a string or as an integer (e.g., minutes)
   createdAt   DateTime @default(now())
 
-  // This is the relation field to track which users have favorited this blog
-  favorites Favorite[] // A blog can have many users who favorited it
+  // Relation to the Favorite model to track which users have favorited this blog
+  favorites   Favorite[] // A blog can have many users who favorited it
 }
 
 model Favorite {
-  id     Int   @id @default(autoincrement())
-  User   User  @relation(fields: [userId], references: [id])
-  userId Int
-  Blog   Blogs @relation(fields: [blogId], references: [id])
-  blogId Int
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  blogId    Int
+  favoredAt DateTime @default(now())  // Track when it was marked as a favorite
 
-  // Ensures that a user cannot favorite the same blog more than once
-  @@unique([userId, blogId])
+  User      User     @relation(fields: [userId], references: [id])
+  Blog      Blogs    @relation(fields: [blogId], references: [id])
+
+  // Enforce uniqueness: A user cannot favorite the same blog more than once
+  @@unique([userId, blogId]) 
 }

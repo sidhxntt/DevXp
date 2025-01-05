@@ -1,4 +1,4 @@
-import fetchContentfulData from '../ContentfulDataFetching';
+import {fetchContentfulData} from '../ContentfulDataFetching';
 
 const get_OLTP_data = () => fetchContentfulData('oltp');
 const get_OLAP_data = () => fetchContentfulData('olap');

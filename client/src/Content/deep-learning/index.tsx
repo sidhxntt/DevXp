@@ -1,4 +1,4 @@
-import fetchContentfulData from '../ContentfulDataFetching';
+import {fetchContentfulData} from '../ContentfulDataFetching';
 
 const get_supervisedAlgorithmsDeepLearning_data = () => fetchContentfulData('supervisedAlgorithmsDeepLearning');
 const get_unsupervisedAlgorithmsDeepLearning_data = () => fetchContentfulData('unsupervisedAlgorithmsDeepLearning');

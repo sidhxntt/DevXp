@@ -52,11 +52,7 @@ const Navbar = () => {
         {/* Logo */}
         <Link to="/" className="flex items-center">
           <div className="h-20 w-20">
-            <img
-              className="object-fill scale-150"
-              src="/Logo.png"
-              alt="logo"
-            />
+            <img className="object-fill scale-150" src="/Logo.png" alt="logo" />
           </div>
         </Link>
 
@@ -72,8 +68,7 @@ const Navbar = () => {
             </Link>
             {display && (
               <Link
-                to="https://handler.devxp.in/"
-                target="_blank"
+                to="/favourites"
                 className="text-sm font-medium hover:underline"
               >
                 Your Favourites
@@ -139,34 +134,26 @@ const Navbar = () => {
             </svg>
           </button>
           <Link
-            to="/features"
+            to="https://handler.devxp.in/"
+            target="_blank"
             className="block text-sm font-medium text-gray-800 hover:underline"
           >
-            Features
+            Connect with me
           </Link>
-          <Link
-            to="/pricing"
-            className="block text-sm font-medium text-gray-800 hover:underline"
-          >
-            Pricing
-          </Link>
-          <Link
-            to="/blog"
-            className="block text-sm font-medium text-gray-800 hover:underline"
-          >
-            Blog
-          </Link>
-          <Link
-            to="/company"
-            className="block text-sm font-medium text-gray-800 hover:underline"
-          >
-            Company
-          </Link>
+          {display && (
+            <Link
+              to="/favourites"
+              className="block text-sm font-medium text-gray-800 hover:underline"
+            >
+              Your Favourites
+            </Link>
+          )}
+
           <button
-            onClick={() => navigate("/get-started")}
+            onClick={() => navigate("/subscription")}
             className="block w-full text-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700"
           >
-            Get Started
+            Subscribe
           </button>
         </div>
       </div>

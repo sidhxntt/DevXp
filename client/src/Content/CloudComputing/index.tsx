@@ -1,4 +1,4 @@
-import fetchContentfulData from '../ContentfulDataFetching';
+import {fetchContentfulData} from '../ContentfulDataFetching';
 
 const get_cloudcomputing_data = () => fetchContentfulData('cloudComputing');
 const get_AWS_data = () => fetchContentfulData('aws');

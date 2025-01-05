@@ -36,7 +36,7 @@ const fetchContentfulData = async (
     const data = res.items;
     // await axios
     //   .post(
-    //     "http://localhost:4000/testing/contentful", 
+    //     `${import.meta.env.VITE_API_ENDPOINT}/add_data`, 
     //     data, 
     //     { 
     //       headers: {
@@ -56,6 +56,65 @@ const fetchContentfulData = async (
   }
 };
 
+const fetchSelectedContentfulData = async (token:string|null): Promise<MappedEntry[] | undefined> => {
+  try {
+    const client = await createConnection();
+    if (!client) {
+      throw new Error("Contentful client is undefined");
+    }
 
-export default fetchContentfulData;
+    // Fetch the selected blogs (user's favorite blogs) from the backend
+    const backendResponse = await axios.get(
+      `${import.meta.env.VITE_API_ENDPOINT}/fav/get_favblog`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const selectedBlogs = backendResponse.data["User Fav Blogs"]; // Extract favorite blogs array
+    if (!Array.isArray(selectedBlogs)) {
+      throw new Error("Invalid response from backend. Expected an array.");
+    }
+
+    // Extract blog titles and content types from the backend response
+    const selectedBlogCriteria = selectedBlogs.map((favBlog: any) => ({
+      title: favBlog.Blog.title,
+      contentType: favBlog.Blog.contentType,
+    }));
+
+    // Group the selected blogs by contentType
+    const groupedByContentType = selectedBlogCriteria.reduce((acc, blog) => {
+      if (!acc[blog.contentType]) {
+        acc[blog.contentType] = [];
+      }
+      acc[blog.contentType].push(blog.title);
+      return acc;
+    }, {} as Record<string, string[]>);
+
+    // Fetch and filter blogs for each contentType
+    const filteredEntries: any[] = [];
+    for (const [contentType, titles] of Object.entries(groupedByContentType)) {
+      const res: any = await client.getEntries({ content_type: contentType });
+      const data = res.items;
+
+      // Filter blogs based on titles
+      const filteredData = data.filter((item: any) => {
+        const blogTitle = item.fields.title;
+        return titles.includes(blogTitle);
+      });
+
+      filteredEntries.push(...filteredData);
+    }
+
+    // Map and return the filtered entries
+    return mapEntries(filteredEntries);
+  } catch (error) {
+    console.error("Error fetching filtered data from Contentful:", error);
+  }
+};
+
+export {fetchContentfulData, fetchSelectedContentfulData};
 export type { MappedEntry };

@@ -11,11 +11,10 @@ interface SkeletonProps {
 }
 
 export function BentoGridDemo() {
-  const {token, data, loading, error} = useFetch("http://localhost:4000/testing")
+  const {token} = useFetch(`${import.meta.env.VITE_API_ENDPOINT}/add_user`)
 
   useEffect(() => {
     console.log("Token: ", token)
-    console.log("Data: ", data)
   }
   , [token])
   return (

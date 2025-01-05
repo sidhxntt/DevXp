@@ -10,7 +10,7 @@ import CloudComputing from './cloud-computing';
 import Databases from './dbms';
 import ErrorBoundary from '../Layouts/ErrorBoundary';
 import Subscribe  from './subscribe';
-
+import UserFav from './favourites';
 
 const routes = createBrowserRouter([
   {
@@ -53,6 +53,10 @@ const routes = createBrowserRouter([
       {
         path: 'subscription',
         element: <Subscribe/>,
+      },
+      {
+        path: 'favourites',
+        element: <UserFav/>,
       }
     ],
   },

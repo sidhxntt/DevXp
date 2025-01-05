@@ -1,4 +1,4 @@
-import fetchContentfulData from '../ContentfulDataFetching';
+import {fetchContentfulData} from '../ContentfulDataFetching';
 
 const get_OS_data = () => fetchContentfulData('os');
 const get_DevopsEssentials_data = () => fetchContentfulData('devopsEssentials');
