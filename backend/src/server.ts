@@ -1,9 +1,11 @@
 import express, { Express, Request, Response, NextFunction } from "express";
 import "dotenv/config";
-import connectToDatabase from "./db";
+import connectToDatabase from "./utils/db";
 import errorHandling from "./controllers/error";
 import cors from "cors";
 import allRoutes from "./routes/INDEX";
+import redis_connection from "./utils/redis_client";
+
 
 const app: Express = express();
 
@@ -26,6 +28,7 @@ app.use(errorHandling);
 const startServer = async (): Promise<void> => {
   try {
     await connectToDatabase(); 
+    await redis_connection();
     app.listen(port, () => {
       console.log(`Server is running at ${server} 🚀`);
     });

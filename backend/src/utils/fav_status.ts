@@ -1,5 +1,6 @@
 import { AuthenticatedRequest } from "../types/Alltypes";
 import {  Response, NextFunction } from "express";
+import redis from "./redis_client";
 
 async function fav_status(req: AuthenticatedRequest, res: Response, next: NextFunction, model1: any, model2: any, model3: any) {
     try {
