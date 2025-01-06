@@ -13,13 +13,11 @@ interface FavButtonProps {
 }
 
 const FavButton: React.FC<FavButtonProps> = ({ card }) => {
-  const [fav, setFav] = useState<boolean>(false); // Tracks if the blog is favorited
-  const [Token] = useRecoilState(tokenAquired); // Read token from Recoil state
+  const [fav, setFav] = useState<boolean>(false); 
+  const [Token] = useRecoilState(tokenAquired); 
 
   const handleClick = async () => {
-
     const data = { title: card.title };
-
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_API_ENDPOINT}/fav/set_favblog`,
@@ -68,7 +66,7 @@ const FavButton: React.FC<FavButtonProps> = ({ card }) => {
     };
 
     checkFavStatus();
-  }, [card.title, Token]); // Only run when card.title or token changes
+  }, [card.title, Token]); 
 
   return (
     <button onClick={handleClick} className="fav-button">
