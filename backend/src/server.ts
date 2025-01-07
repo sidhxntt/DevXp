@@ -14,7 +14,7 @@ const server = process.env.SERVER;
 app.use(express.json({ limit: "50mb" })); 
 app.use(
   cors({
-    origin:  process.env.CLIENT, 
+    origin: process.env.CLIENT, 
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
