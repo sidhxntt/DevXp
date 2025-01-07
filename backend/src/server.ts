@@ -1,4 +1,4 @@
-import express, { Express, Request, Response, NextFunction } from "express";
+import express, { Express } from "express";
 import "dotenv/config";
 import connectToDatabase from "./utils/db";
 import errorHandling from "./controllers/error";
@@ -6,16 +6,15 @@ import cors from "cors";
 import allRoutes from "./routes/INDEX";
 import redis_connection from "./utils/redis_client";
 
-
 const app: Express = express();
 
-const port = process.env.PORT_NUMBER || 4000; 
-const server = process.env.SERVER || "http://localhost";
+const port = process.env.PORT_NUMBER 
+const server = process.env.SERVER;
 
 app.use(express.json({ limit: "50mb" })); 
 app.use(
   cors({
-    origin: "http://localhost:5173", 
+    origin:  process.env.CLIENT, 
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
