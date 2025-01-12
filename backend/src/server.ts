@@ -19,7 +19,6 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
-
 allRoutes(app);
 
 app.use(errorHandling);
@@ -27,7 +26,7 @@ app.use(errorHandling);
 const startServer = async (): Promise<void> => {
   try {
     await connectToDatabase(); 
-    await redis_connection();
+    redis_connection();
     app.listen(port, () => {
       console.log(`Server is running at ${server} 🚀`);
     });
@@ -41,3 +40,4 @@ const startServer = async (): Promise<void> => {
 };
 
 startServer();
+// idk
