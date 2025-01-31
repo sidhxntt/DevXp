@@ -11,6 +11,8 @@ import Databases from './dbms';
 import ErrorBoundary from '../Layouts/ErrorBoundary';
 import Subscribe  from './subscribe';
 import UserFav from './favourites';
+import Data from './data';
+
 
 const routes = createBrowserRouter([
   {
@@ -49,6 +51,10 @@ const routes = createBrowserRouter([
       {
         path: 'cloud-computing',
         element: <CloudComputing/>,
+      },
+      {
+        path: 'data',
+        element: <Data/>,
       },
       {
         path: 'subscription',

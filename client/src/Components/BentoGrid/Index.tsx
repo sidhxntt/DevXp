@@ -1,10 +1,14 @@
 import { BentoGrid, BentoGridItem } from "./BentoGrid";
 import { SiTypescript, SiAnaconda, SiTensorflow } from "react-icons/si";
-import { FaReact, FaCloud } from "react-icons/fa";
+import { FaReact, FaCloud, FaBitcoin } from "react-icons/fa";
 import { FaDatabase } from "react-icons/fa6";
 import { DiLinux } from "react-icons/di";
 import useFetch from "../../hooks/useFetch";
 import { useEffect } from "react";
+import { TbBrandDatabricks } from "react-icons/tb";
+import { VscVscode } from "react-icons/vsc";
+
+
 
 interface SkeletonProps {
   image: string;
@@ -94,5 +98,26 @@ const items = [
     header: <Skeleton image={"/DL.jpeg"} />,
     icon: <SiTensorflow className="h-4 w-4 text-neutral-500" />,
     path: "deep-learning",
+  },
+  {
+    title: "Everything about Data",
+    description: "Master essentials concepts needed to excel in the field of data.",
+    header: <Skeleton image={"/data.jpeg"} />,
+    icon: <TbBrandDatabricks className="h-4 w-4 text-neutral-500" />,
+    path: "data",
+  },
+  {
+    title: "Coding Essentials",
+    description: "Concepts and strategies to become a ninja coder.",
+    header: <Skeleton image={"/coding.jpeg"} />,
+    icon: <VscVscode className="h-4 w-4 text-neutral-500" />,
+    path: "coding",
+  },
+  {
+    title: "Towards The Future",
+    description: "A leap into future technologies.",
+    header: <Skeleton image={"/future.jpeg"} />,
+    icon: <FaBitcoin className="h-4 w-4 text-neutral-500" />,
+    path: "future",
   },
 ];
