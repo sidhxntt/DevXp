@@ -1,4 +1,4 @@
-import { lazy } from "react";
+import { lazy, Suspense } from "react";
 import { motion } from "framer-motion";
 import NavigationButton from "./button";
 
@@ -392,6 +392,7 @@ export function GlobeDemo() {
   ];
 
   return (
+    <Suspense fallback={<div>Loading...</div>}>
     <div className="flex flex-row items-center justify-center  h-screen md:h-auto dark:bg-black bg-black relative w-full">
       <div className="max-w-7xl mx-auto w-full relative overflow-hidden h-full md:h-[40rem] px-4">
         <motion.div
@@ -427,5 +428,6 @@ export function GlobeDemo() {
         </div>
       </div>
     </div>
+    </Suspense>
   );
 }
