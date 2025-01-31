@@ -2,38 +2,26 @@ import { useEffect, useState } from "react";
 import { AppleCardsCarouselDemo } from "../../Components/Carousal/index";
 import GradientCircularProgress from "../../Components/Loader/Loader";
 import { MappedEntry } from "../../Content/ContentfulDataFetching";
-import { get_DataEngneering_data, get_DataMining_data } from "../../Content/data";
-
-
+import { get_WEB3_data } from "../../Content/future";
 
 interface DataState {
-  // add here
-  DataMining: MappedEntry[];
-  DataEngineering: MappedEntry[];
+  WEB3: MappedEntry[];
 }
 
-const Data = () => {
+const FutureRealm = () => {
   const [data, setData] = useState<DataState>({
-    // add here
-    DataMining: [],
-    DataEngineering: [],
+    WEB3: [],
   });
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [DataMining, DataEngineering] = await Promise.all([
-          // add here
-          get_DataMining_data(),
-          get_DataEngneering_data(),
-        ]);
+        const WEB3 = await get_WEB3_data();
 
         setData({
-          // add here
-          DataMining: DataMining || [],
-          DataEngineering: DataEngineering || [],
+          WEB3: WEB3 || [],
         });
       } catch (err) {
         setError("Failed to load data");
@@ -46,21 +34,23 @@ const Data = () => {
     fetchData();
   }, []);
 
-  if (loading)
+  if (loading) {
     return (
       <div className="flex justify-center items-center h-96">
         <GradientCircularProgress />
       </div>
     );
-  if (error) return <p>{error}</p>;
+  }
+
+  if (error) {
+    return <p>{error}</p>;
+  }
 
   return (
-    // add here
     <>
-      <AppleCardsCarouselDemo name="Data Mining" data={data.DataMining} />
-      <AppleCardsCarouselDemo name="Data Engineering" data={data.DataEngineering} />
+      <AppleCardsCarouselDemo name="WEB 3" data={data.WEB3} />
     </>
   );
 };
 
-export default Data;
+export default FutureRealm;

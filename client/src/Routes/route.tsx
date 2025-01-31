@@ -12,6 +12,9 @@ import ErrorBoundary from '../Layouts/ErrorBoundary';
 import Subscribe  from './subscribe';
 import UserFav from './favourites';
 import Data from './data';
+import Coding from './coding';
+import Future from './future';
+import FutureRealm from './future-realm';
 
 
 const routes = createBrowserRouter([
@@ -55,6 +58,18 @@ const routes = createBrowserRouter([
       {
         path: 'data',
         element: <Data/>,
+      },
+      {
+        path: 'coding',
+        element: <Coding/>,
+      },
+      {
+        path: 'future',
+        element: <Future/>,
+      },
+      {
+        path: 'future-realm',
+        element: <FutureRealm/>,
       },
       {
         path: 'subscription',

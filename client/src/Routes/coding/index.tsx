@@ -2,21 +2,18 @@ import { useEffect, useState } from "react";
 import { AppleCardsCarouselDemo } from "../../Components/Carousal/index";
 import GradientCircularProgress from "../../Components/Loader/Loader";
 import { MappedEntry } from "../../Content/ContentfulDataFetching";
-import { get_DataEngneering_data, get_DataMining_data } from "../../Content/data";
-
+import { get_CodingEssentials_data } from "../../Content/coding";
 
 
 interface DataState {
   // add here
-  DataMining: MappedEntry[];
-  DataEngineering: MappedEntry[];
+  Coding: MappedEntry[];
 }
 
-const Data = () => {
+const Coding = () => {
   const [data, setData] = useState<DataState>({
     // add here
-    DataMining: [],
-    DataEngineering: [],
+    Coding: [],
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -24,16 +21,14 @@ const Data = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [DataMining, DataEngineering] = await Promise.all([
+        const [Coding] = await Promise.all([
           // add here
-          get_DataMining_data(),
-          get_DataEngneering_data(),
+          get_CodingEssentials_data(),
         ]);
 
         setData({
           // add here
-          DataMining: DataMining || [],
-          DataEngineering: DataEngineering || [],
+          Coding: Coding || [],
         });
       } catch (err) {
         setError("Failed to load data");
@@ -57,10 +52,9 @@ const Data = () => {
   return (
     // add here
     <>
-      <AppleCardsCarouselDemo name="Data Mining" data={data.DataMining} />
-      <AppleCardsCarouselDemo name="Data Engineering" data={data.DataEngineering} />
+      <AppleCardsCarouselDemo name="Concepts & Strategies" data={data.Coding} />
     </>
   );
 };
 
-export default Data;
+export default Coding;
