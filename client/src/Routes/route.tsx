@@ -9,8 +9,6 @@ import DeepLearning from './deep-learning';
 import CloudComputing from './cloud-computing';
 import Databases from './dbms';
 import ErrorBoundary from '../Layouts/ErrorBoundary';
-import Subscribe  from './subscribe';
-import UserFav from './favourites';
 import Data from './data';
 import Coding from './coding';
 import Future from './future';
@@ -71,14 +69,6 @@ const routes = createBrowserRouter([
         path: 'future-realm',
         element: <FutureRealm/>,
       },
-      {
-        path: 'subscription',
-        element: <Subscribe/>,
-      },
-      {
-        path: 'favourites',
-        element: <UserFav/>,
-      }
     ],
   },
 ]);

@@ -3,24 +3,14 @@ import { SiTypescript, SiAnaconda, SiTensorflow } from "react-icons/si";
 import { FaReact, FaCloud, FaBitcoin } from "react-icons/fa";
 import { FaDatabase } from "react-icons/fa6";
 import { DiLinux } from "react-icons/di";
-import useFetch from "../../hooks/useFetch";
-import { useEffect } from "react";
 import { TbBrandDatabricks } from "react-icons/tb";
 import { VscVscode } from "react-icons/vsc";
-
-
 
 interface SkeletonProps {
   image: string;
 }
 
 export function BentoGridDemo() {
-  const {token} = useFetch(`${import.meta.env.VITE_API_ENDPOINT}/add_user`)
-
-  useEffect(() => {
-    console.log("Token: ", token)
-  }
-  , [token])
   return (
           <BentoGrid className="w-screen h-sv">
       {items.map((item, i) => (

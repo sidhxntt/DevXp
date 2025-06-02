@@ -13,7 +13,6 @@ import React, {
   useContext,
 } from "react";
 import renderOptions from "../../Content/documentToReactComponents(options)";
-import FavButton from "./FavButton";
 
 interface CarouselProps {
   items: JSX.Element[];
@@ -206,7 +205,6 @@ export const Card = ({
                 >
                   {card.title}
                 </motion.p>
-                <FavButton card={card} />
               </div>
 
               <div className="relative py-10 px-6 prose prose-a:text-blue-400  left-1/2 transform -translate-x-1/2">

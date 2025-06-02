@@ -1,45 +1,6 @@
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "@clerk/clerk-react";
-import {
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  UserButton,
-} from "@clerk/clerk-react";
-import { useEffect, useState } from "react";
-
-const DisplayPic = () => (
-  <header className="text-white">
-    <SignedOut>
-      <SignInButton />
-    </SignedOut>
-    <SignedIn>
-      <UserButton />
-    </SignedIn>
-  </header>
-);
 
 const Navbar = () => {
-  const navigate = useNavigate();
-  const { getToken } = useAuth();
-  const [display, setDisplay] = useState<boolean>(false);
-
-  useEffect(() => {
-    const fetchToken = async () => {
-      try {
-        const template = "DevXPUserInfo";
-        const token = await getToken({ template });
-        if (token) {
-          setDisplay(true);
-        }
-      } catch (error) {
-        console.error("Failed to fetch token:", error);
-      }
-    };
-
-    fetchToken();
-  }, [getToken]);
 
   const toggleMobileMenu = () => {
     const mobileMenu = document.getElementById("mobile-menu");
@@ -66,26 +27,7 @@ const Navbar = () => {
             >
               Connect with me
             </Link>
-            {display && (
-              <Link
-                to="/favourites"
-                className="text-sm font-medium hover:underline"
-              >
-                Your Favourites
-              </Link>
-            )}
           </nav>
-
-          {/* User Section */}
-          <DisplayPic />
-
-          {/* Subscribe Button */}
-          <button
-            onClick={() => navigate("/subscription")}
-            className="hidden md:inline-block px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700"
-          >
-            Subscribe
-          </button>
 
           {/* Mobile Navigation Toggle */}
           <button
@@ -140,21 +82,7 @@ const Navbar = () => {
           >
             Connect with me
           </Link>
-          {display && (
-            <Link
-              to="/favourites"
-              className="block text-sm font-medium text-gray-800 hover:underline"
-            >
-              Your Favourites
-            </Link>
-          )}
 
-          <button
-            onClick={() => navigate("/subscription")}
-            className="block w-full text-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700"
-          >
-            Subscribe
-          </button>
         </div>
       </div>
     </header>
