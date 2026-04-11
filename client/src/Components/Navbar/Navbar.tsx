@@ -19,15 +19,7 @@ const Navbar = () => {
 
         <div className="flex items-center space-x-4">
           {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex space-x-4">
-            <Link
-              to="https://handler.devxp.in/"
-              target="_blank"
-              className="text-sm font-medium hover:underline"
-            >
-              Connect with me
-            </Link>
-          </nav>
+
 
           {/* Mobile Navigation Toggle */}
           <button
@@ -75,13 +67,6 @@ const Navbar = () => {
               />
             </svg>
           </button>
-          <Link
-            to="https://handler.devxp.in/"
-            target="_blank"
-            className="block text-sm font-medium text-gray-800 hover:underline"
-          >
-            Connect with me
-          </Link>
 
         </div>
       </div>
