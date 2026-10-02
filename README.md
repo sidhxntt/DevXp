@@ -23,7 +23,6 @@ A modern React-based web application providing structured learning paths for var
   - Future Technologies (Web3, Blockchain)
 - **Carousel Components**: Smooth content browsing with animated carousels
 - **Error Boundaries**: Robust error handling with custom 404 pages
-- **Authentication Ready**: Clerk authentication integration
 - **State Management**: Recoil for global state management
 
 ## Prerequisites
@@ -47,7 +46,6 @@ npm install
 
 3. Create a `.env` file in the root directory with the following variables:
 ```env
-VITE_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
 VITE_CONTENTFUL_SPACE_ID=your_contentful_space_id
 VITE_CONTENTFUL_ACCESS_TOKEN=your_contentful_access_token
 ```
@@ -63,7 +61,6 @@ npm run dev
 
 The application requires the following environment variables:
 
-- `VITE_CLERK_PUBLISHABLE_KEY`: Clerk authentication public key
 - `VITE_CONTENTFUL_SPACE_ID`: Contentful CMS space identifier
 - `VITE_CONTENTFUL_ACCESS_TOKEN`: Contentful delivery API access token
 
@@ -101,15 +98,6 @@ import { fetchContentfulData } from './Content/ContentfulDataFetching';
 const data = await fetchContentfulData('frontendEssentials');
 ```
 
-### Using Custom Hooks
-
-```typescript
-// Fetch data with authentication
-import useFetch from './hooks/useFetch';
-
-const { data, loading, error } = useFetch<DataType>('/api/endpoint');
-```
-
 ### Globe Component
 
 ```typescript
@@ -145,7 +133,6 @@ src/
 │   ├── RootLayout.tsx     # Main layout wrapper
 │   └── ErrorBoundary.tsx  # Error boundary component
 ├── hooks/                  # Custom React hooks
-│   ├── useFetch.tsx       # Data fetching hook
 │   └── use-outside-click.ts # Outside click detection
 ├── lib/                    # Utility functions
 │   ├── utils.ts           # General utilities
