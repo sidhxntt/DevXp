@@ -13,6 +13,7 @@ import Data from './data';
 import Coding from './coding';
 import Future from './future';
 import FutureRealm from './future-realm';
+import Search from './search';
 
 
 const routes = createBrowserRouter([
@@ -68,6 +69,10 @@ const routes = createBrowserRouter([
       {
         path: 'future-realm',
         element: <FutureRealm/>,
+      },
+      {
+        path: 'search',
+        element: <Search/>,
       },
     ],
   },
