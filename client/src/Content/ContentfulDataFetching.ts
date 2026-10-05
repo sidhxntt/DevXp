@@ -39,5 +39,16 @@ const fetchContentfulData = async (
   }
 };
 
-export { fetchContentfulData };
+const searchContentfulData = async (searchTerm: string): Promise<MappedEntry[]> => {
+  const query = searchTerm.trim();
+  if (!query) return [];
+
+  const client = await createConnection();
+  if (!client) throw new Error("Contentful client is undefined");
+
+  const res = await client.getEntries({ query, limit: 20 });
+  return mapEntries(res.items);
+};
+
+export { fetchContentfulData, searchContentfulData };
 export type { MappedEntry };
