@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Coffee } from "lucide-react";
 import {
   InputGroup,
   InputGroupAddon,
@@ -24,10 +25,10 @@ const Navbar = () => {
   };
 
   return (
-    <header className="sticky top-0 bg-[rgba(0,0,0,0.23)] backdrop-blur-md p-6 z-50 text-white">
-      <div className="flex flex-wrap items-center justify-between gap-2 mx-auto max-w-7xl">
+    <header className="sticky top-0 z-50 bg-[rgba(0,0,0,0.23)] px-4 py-4 text-white backdrop-blur-md md:px-6">
+      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-2">
         {/* Logo */}
-        <Link to="/" className="flex items-center">
+        <Link to="/" className="flex shrink-0 items-center">
           <div className="h-20 w-20">
             <img className="object-fill scale-150" src="/Logo.png" alt="logo" />
           </div>
@@ -44,7 +45,16 @@ const Navbar = () => {
               onChange={(event) => setSearchTerm(event.target.value)}
               className="h-full min-w-0 px-3 text-white placeholder:text-neutral-300"
             />
-            <InputGroupAddon align="inline-end" className="h-full shrink-0 !mr-0 py-0 pr-0">
+            <InputGroupAddon align="inline-end" className="h-full shrink-0 !mr-0 gap-3 py-0 pr-0">
+              <a
+                href="https://sidhxntt.dev/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Visit sidhxntt.dev"
+                className="inline-flex size-8 items-center justify-center rounded-lg text-neutral-300 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              >
+                <Coffee aria-hidden="true" />
+              </a>
               <InputGroupButton
                 type="submit"
                 size="sm"

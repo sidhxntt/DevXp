@@ -42,3 +42,16 @@ it("does not navigate when the search term is blank", async () => {
 
   expect(screen.getByTestId("location")).toHaveTextContent(/^\/$/);
 });
+
+it("opens the coffee link in a new tab", () => {
+  render(
+    <MemoryRouter>
+      <Navbar />
+    </MemoryRouter>
+  );
+
+  const coffeeLink = screen.getByRole("link", { name: "Visit sidhxntt.dev" });
+  expect(coffeeLink).toHaveAttribute("href", "https://sidhxntt.dev/");
+  expect(coffeeLink).toHaveAttribute("target", "_blank");
+  expect(coffeeLink).toHaveAttribute("rel", "noopener noreferrer");
+});
